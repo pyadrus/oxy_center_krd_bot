@@ -2,7 +2,6 @@ from aiogram import types
 from aiogram.dispatcher import FSMContext  # Состояния пользователя
 
 from keyboards.user_keyboards import greeting_keyboards  # Клавиатуры поста приветствия
-from messages.user_messages import greeting_post
 from system.dispatcher import dp  # Подключение к боту и диспетчеру пользователя
 
 
@@ -11,8 +10,12 @@ async def greeting(message: types.Message, state: FSMContext):
     """Обработчик команды /start, он же пост приветствия"""
     await state.finish()
     await state.reset_state()
+
+    # Получаем имя пользователя
+    from_user_name = message.from_user.first_name
+    greeting_post = (f"{from_user_name}, Вас приветствует чат-бот клиники мужского и женского здоровья <b>OXY center!</b>")
+
     keyboards_greeting = greeting_keyboards()
-    # Клавиатура для Калькулятора цен или Контактов
     await message.reply(greeting_post, reply_markup=keyboards_greeting, disable_web_page_preview=True,
                         parse_mode=types.ParseMode.HTML)
 
