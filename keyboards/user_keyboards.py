@@ -1,5 +1,6 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
+
 def greeting_keyboards():
     """Клавиатуры поста приветствия 👋"""
     keyboards_greeting = InlineKeyboardMarkup()
@@ -18,6 +19,7 @@ def greeting_keyboards():
     keyboards_greeting.row(contacts_and_address, current_promotions)  # Контакты и адрес, Текущие акции
     keyboards_greeting.row(contact_the_operator)  # Связаться с оператором
     return keyboards_greeting
+
 
 if __name__ == '__main__':
     greeting_keyboards()
