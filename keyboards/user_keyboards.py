@@ -21,5 +21,14 @@ def greeting_keyboards():
     return keyboards_greeting
 
 
+def sign_up_keyboards():
+    keyboards_sign_up = InlineKeyboardMarkup()
+    agree = InlineKeyboardButton(text='👍 Согласен', callback_data='agree')
+    after = InlineKeyboardButton(text='👎 Не согласен', callback_data='disagree')
+    keyboards_sign_up.row(agree, after)
+    return keyboards_sign_up
+
+
 if __name__ == '__main__':
     greeting_keyboards()
+    sign_up_keyboards()
