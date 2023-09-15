@@ -17,8 +17,8 @@ async def sign_up_handlers(callback_query: types.CallbackQuery):
                                reply_markup=keyboards_sign_up,
                                parse_mode=types.ParseMode.HTML,
                                disable_web_page_preview=True)
-    except Exception as e:
-        logger.exception(e)
+    except Exception as error:
+        logger.exception(error)
 
 
 # Создание класса состояний

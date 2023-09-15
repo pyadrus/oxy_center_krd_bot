@@ -22,8 +22,8 @@ async def greeting(message: types.Message, state: FSMContext):
                                       caption=greeting_post,  # Текст для приветствия 👋
                                       reply_markup=keyboards_greeting,  # Клавиатура приветствия 👋
                                       parse_mode=types.ParseMode.HTML)  # Текст в HTML-разметки
-    except Exception as e:
-        logger.exception(e)
+    except Exception as error:
+        logger.exception(error)
 
 
 @dp.callback_query_handler(lambda c: c.data == "disagree")
@@ -41,8 +41,8 @@ async def disagree_handler(callback_query: types.CallbackQuery, state: FSMContex
                                                      caption=greeting_post,  # Текст для приветствия 👋
                                                      reply_markup=keyboards_greeting,  # Клавиатура приветствия 👋
                                                      parse_mode=types.ParseMode.HTML)  # Текст в HTML-разметки
-    except Exception as e:
-        logger.exception(e)
+    except Exception as error:
+        logger.exception(error)
 
 
 def greeting_handler():
