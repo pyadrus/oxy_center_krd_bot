@@ -15,14 +15,14 @@ def main() -> None:
     """Запуск бота https://t.me/oxy_center_krd_bot"""
     try:
         executor.start_polling(dp, skip_updates=True)
-    except Exception as e:
-        logger.exception(e)
+    except Exception as error:
+        logger.exception(error)
 
     greeting_handler()  # Пост приветствие
     register_current_promotions_handler()  # Текущие акции
     register_contacts_and_address_handler()  # Контакты и адрес
     register_ask_anonymous_question_handler()  # Задать анонимный вопрос
-    register_callback_query_handler() # Записаться
+    register_callback_query_handler()  # Записаться
 
 
 if __name__ == '__main__':
