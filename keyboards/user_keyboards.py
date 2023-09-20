@@ -29,6 +29,15 @@ def sign_up_keyboards():
     return keyboards_sign_up
 
 
+def confirmation_keypad():
+    confirmation_keyboards = InlineKeyboardMarkup()
+    faithfully = InlineKeyboardButton(text="👍 Верно", callback_data="faithfully")
+    not_true = InlineKeyboardButton(text="👎 Не верно", callback_data="not_true")
+    confirmation_keyboards.row(faithfully, not_true)
+    return confirmation_keyboards
+
+
 if __name__ == '__main__':
     greeting_keyboards()
     sign_up_keyboards()
+    confirmation_keypad()
