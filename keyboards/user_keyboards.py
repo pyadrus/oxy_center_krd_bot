@@ -30,6 +30,10 @@ def sign_up_keyboards():
 
 
 def confirmation_keypad():
+    """
+    Верно - faithfully
+    Не верно - not_true
+    """
     confirmation_keyboards = InlineKeyboardMarkup()
     faithfully = InlineKeyboardButton(text="👍 Верно", callback_data="faithfully")
     not_true = InlineKeyboardButton(text="👎 Не верно", callback_data="not_true")
@@ -37,7 +41,23 @@ def confirmation_keypad():
     return confirmation_keyboards
 
 
+def appointment_selection_keypad():
+    """
+    Позвонить - сall_key
+    Заказать обратный звонок - callback_key
+    Чат с оператором - url="https://t.me/pk_alina"
+    """
+    appointment_selection_key = InlineKeyboardMarkup()
+    call_key = InlineKeyboardButton(text="Позвонить", callback_data="сall_key")
+    callback_key = InlineKeyboardButton(text="Заказать обратный звонок", callback_data="callback_key")
+    chat_with_an_operator_key = InlineKeyboardButton(text="Чат с оператором", url="https://t.me/pk_alina")
+    appointment_selection_key.row(call_key, callback_key)
+    appointment_selection_key.row(chat_with_an_operator_key)
+    return appointment_selection_key
+
+
 if __name__ == '__main__':
     greeting_keyboards()
     sign_up_keyboards()
     confirmation_keypad()
+    appointment_selection_keypad()
