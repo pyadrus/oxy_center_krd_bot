@@ -2,7 +2,6 @@ from aiogram import executor
 from loguru import logger
 
 from handlers.ask_anonymous_question_handlers import register_ask_anonymous_question_handler
-from handlers.call_us_handlers import register_call_us_handler
 from handlers.contacts_and_address_handlers import register_contacts_and_address_handler
 from handlers.current_promotions_handlers import register_current_promotions_handler
 from handlers.my_details_handlers import register_my_detalist_handler
@@ -25,7 +24,6 @@ def main() -> None:
     register_contacts_and_address_handler()  # Контакты и адрес
     register_ask_anonymous_question_handler()  # Задать анонимный вопрос
     register_callback_query_handler()  # Записаться
-    register_call_us_handler()  # Позвонить
     register_my_detalist_handler()  # Мои данные
 
 

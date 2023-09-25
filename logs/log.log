@@ -998,3 +998,37 @@ Traceback (most recent call last):
     └ <aiogram.dispatcher.dispatcher.Dispatcher object at 0x0000020F36ECF050>
 
 NameError: name 'agree_handler' is not defined
+2023-09-25 16:29:12.344 | ERROR    | __main__:<module>:36 - name 'agree_handler' is not defined
+Traceback (most recent call last):
+
+> File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 34, in <module>
+    main()  # Запуск бота
+    └ <function main at 0x00000215F58F87C0>
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 28, in main
+    register_call_us_handler()  # Позвонить
+    └ <function register_call_us_handler at 0x00000215F636C4A0>
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\handlers\call_us_handlers.py", line 100, in register_call_us_handler
+    dp.register_message_handler(agree_handler)
+    │  └ <function Dispatcher.register_message_handler at 0x00000215F62182C0>
+    └ <aiogram.dispatcher.dispatcher.Dispatcher object at 0x00000215F6361A90>
+
+NameError: name 'agree_handler' is not defined
+2023-09-25 16:35:20.302 | ERROR    | __main__:<module>:36 - name 'agree_handler' is not defined
+Traceback (most recent call last):
+
+> File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 34, in <module>
+    main()  # Запуск бота
+    └ <function main at 0x000001773DE887C0>
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 28, in main
+    register_call_us_handler()  # Позвонить
+    └ <function register_call_us_handler at 0x000001773E0FC4A0>
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\handlers\call_us_handlers.py", line 100, in register_call_us_handler
+    dp.register_message_handler(agree_handler)
+    │  └ <function Dispatcher.register_message_handler at 0x000001773DFA82C0>
+    └ <aiogram.dispatcher.dispatcher.Dispatcher object at 0x000001773E0F1950>
+
+NameError: name 'agree_handler' is not defined
