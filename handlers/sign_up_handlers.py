@@ -5,7 +5,7 @@ from aiogram.dispatcher import FSMContext
 from aiogram.types import ParseMode
 from loguru import logger  # Логирование с помощью loguru
 
-from keyboards.user_keyboards import appointment_selection_keypad
+from keyboards.user_keyboards import appointment_selection_keypad, my_details
 from system.dispatcher import bot
 from system.dispatcher import dp  # Подключение к боту и диспетчеру пользователя
 
@@ -55,20 +55,33 @@ async def sign_up_handler(callback_query: types.CallbackQuery):
         logger.exception(error)
 
 
+# Обработчик callback-запроса
 @dp.callback_query_handler(lambda c: c.data == "call_us")
 async def call_handler(callback_query: types.CallbackQuery, state: FSMContext):
     user_id = callback_query.from_user.id  # Получаем ID текущего пользователя
-    user_exists = check_user_exists_in_db(user_id)  # Функция, которая проверяет наличие пользователя в базе данных
+    user_exists = check_user_exists_in_db(user_id)  # Проверяем наличие пользователя в базе данных
+
     if user_exists:
+        # Если пользователь существует, отправляем сообщение с номером телефона
         sign_up_text = ("Для связи с call-центром клиники наберите следующий номер: 8 (800) 550-98-17\n\n"
                         "Для перехода в начальное меню нажмите /start")
+        # Отправляем сообщение с номером телефона или сообщением о регистрации
+        await bot.send_message(callback_query.from_user.id, sign_up_text,
+                               parse_mode=ParseMode.HTML,
+                               disable_web_page_preview=True)
     else:
-        sign_up_text = ("Вы не зарегистрированы в нашей системе. "
-                        "Для доступа к этому разделу, пожалуйста, зарегистрируйтесь в меню 'Мои данные'.\n\n"
+        # Если пользователя нет в базе данных, предлагаем пройти регистрацию
+        sign_up_text = ("⚠️ <b>Вы не зарегистрированы в нашей системе</b> ⚠️\n\n"
+                        "Для доступа к этому разделу, пожалуйста, <b>зарегистрируйтесь</b> в меню 'Мои данные'.\n\n"
                         "Для перехода в начальное меню нажмите /start")
-    await bot.send_message(callback_query.from_user.id, sign_up_text,
-                           parse_mode=ParseMode.HTML,
-                           disable_web_page_preview=True)
+
+        # Создаем клавиатуру с помощью my_details() (предполагается, что она существует)
+        my_details_key = my_details()
+        # Отправляем сообщение с предложением зарегистрироваться и клавиатурой
+        await bot.send_message(callback_query.from_user.id, sign_up_text,
+                               reply_markup=my_details_key,
+                               parse_mode=ParseMode.HTML,
+                               disable_web_page_preview=True)
 
 
 @dp.callback_query_handler(lambda c: c.data == "callback_key")
@@ -89,13 +102,20 @@ async def callback_key_handler(callback_query: types.CallbackQuery, state: FSMCo
         sign_up_text = ("✅ Ваши данные успешно переданы оператору. В ближайшее время мы с вами свяжемся.\n"
                         "Изменить данные вы можете в меню 'Мои данные'.\n\n"
                         "Для перехода в начальное меню нажмите /start")
+        await bot.send_message(callback_query.from_user.id, sign_up_text,
+                               parse_mode=ParseMode.HTML,
+                               disable_web_page_preview=True)
     else:
         sign_up_text = ("⚠️ <b>Вы не зарегистрированы в нашей системе</b> ⚠️\n\n"
                         "Для доступа к этому разделу, пожалуйста, <b>зарегистрируйтесь</b> в меню 'Мои данные'.\n\n"
                         "Для перехода в начальное меню нажмите /start")
-    await bot.send_message(callback_query.from_user.id, sign_up_text,
-                           parse_mode=ParseMode.HTML,
-                           disable_web_page_preview=True)
+        # Создаем клавиатуру с помощью my_details() (предполагается, что она существует)
+        my_details_key = my_details()
+        # Отправляем сообщение с предложением зарегистрироваться и клавиатурой
+        await bot.send_message(callback_query.from_user.id, sign_up_text,
+                               reply_markup=my_details_key,
+                               parse_mode=ParseMode.HTML,
+                               disable_web_page_preview=True)
 
 
 def register_callback_query_handler():

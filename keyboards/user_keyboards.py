@@ -22,6 +22,14 @@ def greeting_keyboards():
     return keyboards_greeting
 
 
+def my_details():
+    """Кнопка мои данные"""
+    my_details_key = InlineKeyboardMarkup()
+    my_detailss = InlineKeyboardButton(text='Мои данные', callback_data='my_details')
+    my_details_key.row(my_detailss)  # Связаться с оператором
+    return my_details_key
+
+
 def sign_up_keyboards():
     """
     👍 Согласен - agree
@@ -80,3 +88,4 @@ if __name__ == '__main__':
     confirmation_keypad()
     appointment_selection_keypad()
     contact_keyboard()
+    my_details()
