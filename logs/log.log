@@ -777,3 +777,224 @@ Traceback (most recent call last):
     └ <aiogram.dispatcher.dispatcher.Dispatcher object at 0x000002007E4A1690>
 
 NameError: name 'agree_handler' is not defined
+2023-09-25 15:48:50.583 | ERROR    | __main__:<module>:36 - name 'agree_handler' is not defined
+Traceback (most recent call last):
+
+> File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 34, in <module>
+    main()  # Запуск бота
+    └ <function main at 0x000001C9341C47C0>
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 28, in main
+    register_call_us_handler()  # Позвонить
+    └ <function register_call_us_handler at 0x000001C934C3C4A0>
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\handlers\call_us_handlers.py", line 100, in register_call_us_handler
+    dp.register_message_handler(agree_handler)
+    │  └ <function Dispatcher.register_message_handler at 0x000001C934AE82C0>
+    └ <aiogram.dispatcher.dispatcher.Dispatcher object at 0x000001C934C31A50>
+
+NameError: name 'agree_handler' is not defined
+2023-09-25 15:52:30.538 | ERROR    | __main__:<module>:36 - name 'agree_handler' is not defined
+Traceback (most recent call last):
+
+> File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 34, in <module>
+    main()  # Запуск бота
+    └ <function main at 0x00000246D12947C0>
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 28, in main
+    register_call_us_handler()  # Позвонить
+    └ <function register_call_us_handler at 0x00000246D150C4A0>
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\handlers\call_us_handlers.py", line 100, in register_call_us_handler
+    dp.register_message_handler(agree_handler)
+    │  └ <function Dispatcher.register_message_handler at 0x00000246D13B82C0>
+    └ <aiogram.dispatcher.dispatcher.Dispatcher object at 0x00000246D1501B90>
+
+NameError: name 'agree_handler' is not defined
+2023-09-25 15:54:17.527 | ERROR    | __main__:<module>:36 - name 'agree_handler' is not defined
+Traceback (most recent call last):
+
+> File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 34, in <module>
+    main()  # Запуск бота
+    └ <function main at 0x00000235546487C0>
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 28, in main
+    register_call_us_handler()  # Позвонить
+    └ <function register_call_us_handler at 0x00000235548BC4A0>
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\handlers\call_us_handlers.py", line 100, in register_call_us_handler
+    dp.register_message_handler(agree_handler)
+    │  └ <function Dispatcher.register_message_handler at 0x00000235547682C0>
+    └ <aiogram.dispatcher.dispatcher.Dispatcher object at 0x00000235548B1810>
+
+NameError: name 'agree_handler' is not defined
+2023-09-25 15:55:01.815 | ERROR    | __main__:<module>:36 - name 'agree_handler' is not defined
+Traceback (most recent call last):
+
+> File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 34, in <module>
+    main()  # Запуск бота
+    └ <function main at 0x00000172291E87C0>
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 28, in main
+    register_call_us_handler()  # Позвонить
+    └ <function register_call_us_handler at 0x000001722945C4A0>
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\handlers\call_us_handlers.py", line 100, in register_call_us_handler
+    dp.register_message_handler(agree_handler)
+    │  └ <function Dispatcher.register_message_handler at 0x00000172293082C0>
+    └ <aiogram.dispatcher.dispatcher.Dispatcher object at 0x0000017229451A10>
+
+NameError: name 'agree_handler' is not defined
+2023-09-25 16:00:06.498 | ERROR    | __main__:<module>:36 - name 'agree_handler' is not defined
+Traceback (most recent call last):
+
+> File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 34, in <module>
+    main()  # Запуск бота
+    └ <function main at 0x00000189EEBF87C0>
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 28, in main
+    register_call_us_handler()  # Позвонить
+    └ <function register_call_us_handler at 0x00000189EEE6C4A0>
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\handlers\call_us_handlers.py", line 100, in register_call_us_handler
+    dp.register_message_handler(agree_handler)
+    │  └ <function Dispatcher.register_message_handler at 0x00000189EED182C0>
+    └ <aiogram.dispatcher.dispatcher.Dispatcher object at 0x00000189EEE0F050>
+
+NameError: name 'agree_handler' is not defined
+2023-09-25 16:01:42.063 | ERROR    | __main__:<module>:36 - name 'agree_handler' is not defined
+Traceback (most recent call last):
+
+> File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 34, in <module>
+    main()  # Запуск бота
+    └ <function main at 0x000001E0222487C0>
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 28, in main
+    register_call_us_handler()  # Позвонить
+    └ <function register_call_us_handler at 0x000001E0224BC4A0>
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\handlers\call_us_handlers.py", line 100, in register_call_us_handler
+    dp.register_message_handler(agree_handler)
+    │  └ <function Dispatcher.register_message_handler at 0x000001E0223682C0>
+    └ <aiogram.dispatcher.dispatcher.Dispatcher object at 0x000001E0224B1750>
+
+NameError: name 'agree_handler' is not defined
+2023-09-25 16:22:47.320 | ERROR    | __main__:<module>:36 - name 'agree_handler' is not defined
+Traceback (most recent call last):
+
+> File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 34, in <module>
+    main()  # Запуск бота
+    └ <function main at 0x0000025EACB687C0>
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 28, in main
+    register_call_us_handler()  # Позвонить
+    └ <function register_call_us_handler at 0x0000025EACDDC4A0>
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\handlers\call_us_handlers.py", line 100, in register_call_us_handler
+    dp.register_message_handler(agree_handler)
+    │  └ <function Dispatcher.register_message_handler at 0x0000025EACC882C0>
+    └ <aiogram.dispatcher.dispatcher.Dispatcher object at 0x0000025EACDD1A10>
+
+NameError: name 'agree_handler' is not defined
+2023-09-25 16:23:27.559 | ERROR    | __main__:<module>:36 - name 'agree_handler' is not defined
+Traceback (most recent call last):
+
+> File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 34, in <module>
+    main()  # Запуск бота
+    └ <function main at 0x000001857BC387C0>
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 28, in main
+    register_call_us_handler()  # Позвонить
+    └ <function register_call_us_handler at 0x000001857BEAC4A0>
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\handlers\call_us_handlers.py", line 100, in register_call_us_handler
+    dp.register_message_handler(agree_handler)
+    │  └ <function Dispatcher.register_message_handler at 0x000001857BD582C0>
+    └ <aiogram.dispatcher.dispatcher.Dispatcher object at 0x000001857BE4F050>
+
+NameError: name 'agree_handler' is not defined
+2023-09-25 16:25:37.549 | ERROR    | __main__:<module>:36 - name 'agree_handler' is not defined
+Traceback (most recent call last):
+
+> File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 34, in <module>
+    main()  # Запуск бота
+    └ <function main at 0x00000265401C87C0>
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 28, in main
+    register_call_us_handler()  # Позвонить
+    └ <function register_call_us_handler at 0x000002654043C4A0>
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\handlers\call_us_handlers.py", line 100, in register_call_us_handler
+    dp.register_message_handler(agree_handler)
+    │  └ <function Dispatcher.register_message_handler at 0x00000265402E82C0>
+    └ <aiogram.dispatcher.dispatcher.Dispatcher object at 0x0000026540431A10>
+
+NameError: name 'agree_handler' is not defined
+2023-09-25 16:26:11.514 | ERROR    | __main__:<module>:36 - name 'agree_handler' is not defined
+Traceback (most recent call last):
+
+> File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 34, in <module>
+    main()  # Запуск бота
+    └ <function main at 0x0000028E8AEC87C0>
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 28, in main
+    register_call_us_handler()  # Позвонить
+    └ <function register_call_us_handler at 0x0000028E8B13C4A0>
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\handlers\call_us_handlers.py", line 100, in register_call_us_handler
+    dp.register_message_handler(agree_handler)
+    │  └ <function Dispatcher.register_message_handler at 0x0000028E8AFE82C0>
+    └ <aiogram.dispatcher.dispatcher.Dispatcher object at 0x0000028E8B131890>
+
+NameError: name 'agree_handler' is not defined
+2023-09-25 16:26:21.059 | ERROR    | __main__:<module>:36 - name 'agree_handler' is not defined
+Traceback (most recent call last):
+
+> File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 34, in <module>
+    main()  # Запуск бота
+    └ <function main at 0x000001C1D74587C0>
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 28, in main
+    register_call_us_handler()  # Позвонить
+    └ <function register_call_us_handler at 0x000001C1D7ECC4A0>
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\handlers\call_us_handlers.py", line 100, in register_call_us_handler
+    dp.register_message_handler(agree_handler)
+    │  └ <function Dispatcher.register_message_handler at 0x000001C1D7D782C0>
+    └ <aiogram.dispatcher.dispatcher.Dispatcher object at 0x000001C1D7EC1CD0>
+
+NameError: name 'agree_handler' is not defined
+2023-09-25 16:26:35.719 | ERROR    | __main__:<module>:36 - name 'agree_handler' is not defined
+Traceback (most recent call last):
+
+> File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 34, in <module>
+    main()  # Запуск бота
+    └ <function main at 0x000001AE6C2987C0>
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 28, in main
+    register_call_us_handler()  # Позвонить
+    └ <function register_call_us_handler at 0x000001AE6C50C4A0>
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\handlers\call_us_handlers.py", line 100, in register_call_us_handler
+    dp.register_message_handler(agree_handler)
+    │  └ <function Dispatcher.register_message_handler at 0x000001AE6C3B82C0>
+    └ <aiogram.dispatcher.dispatcher.Dispatcher object at 0x000001AE6C501A10>
+
+NameError: name 'agree_handler' is not defined
+2023-09-25 16:26:54.610 | ERROR    | __main__:<module>:36 - name 'agree_handler' is not defined
+Traceback (most recent call last):
+
+> File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 34, in <module>
+    main()  # Запуск бота
+    └ <function main at 0x0000020F364B87C0>
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 28, in main
+    register_call_us_handler()  # Позвонить
+    └ <function register_call_us_handler at 0x0000020F36F2C4A0>
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\handlers\call_us_handlers.py", line 100, in register_call_us_handler
+    dp.register_message_handler(agree_handler)
+    │  └ <function Dispatcher.register_message_handler at 0x0000020F36DD82C0>
+    └ <aiogram.dispatcher.dispatcher.Dispatcher object at 0x0000020F36ECF050>
+
+NameError: name 'agree_handler' is not defined

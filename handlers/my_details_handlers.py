@@ -1,4 +1,5 @@
 import sqlite3
+from datetime import datetime
 
 from aiogram import types
 from aiogram.dispatcher import FSMContext
@@ -7,27 +8,39 @@ from aiogram.types import ParseMode, ReplyKeyboardMarkup, KeyboardButton
 
 from keyboards.user_keyboards import sign_up_keyboards
 from messages.user_messages import sign_up_text
-from services.database import writing_to_the_database
 from system.dispatcher import dp, bot
-from datetime import datetime
 
 
-# Функция для создания таблицы, если она не существует
-def create_table_if_not_exists():
+def get_user_data_from_db(user_id):
     conn = sqlite3.connect("your_database.db")  # Замените "your_database.db" на имя вашей базы данных
     cursor = conn.cursor()
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS users (
-            id INTEGER PRIMARY KEY,
-            name TEXT,
-            surname TEXT,
-            city TEXT,
-            phone_number TEXT,
-            registration_date TEXT
-        )
-    ''')
-    conn.commit()
+    cursor.execute('''CREATE TABLE IF NOT EXISTS users (
+                                                                user_id INTEGER,
+                                                                name TEXT,
+                                                                surname TEXT,
+                                                                city TEXT,
+                                                                phone_number TEXT,
+                                                                registration_date TEXT)''')
+    # Выполните SQL-запрос для получения данных о пользователе по его user_id
+    cursor.execute("SELECT * FROM users WHERE user_id = ?", (user_id,))
+
+    user_data = cursor.fetchone()  # Получите данные первой найденной записи
+
     conn.close()
+
+    # Верните данные о пользователе как словарь, если они существуют, или None, если пользователя нет
+    if user_data:
+        _, name, surname, city, phone_number, registration_date = user_data
+        return {
+            'name': name,
+            'surname': surname,
+            'city': city,
+            'phone_number': phone_number,
+            'registration_date': registration_date
+        }
+    else:
+        return None
+
 
 # Создание класса состояний
 class MakingAnOrder(StatesGroup):
@@ -38,12 +51,35 @@ class MakingAnOrder(StatesGroup):
 
 
 @dp.callback_query_handler(lambda c: c.data == "my_details")
-async def call_us_handler(callback_query: types.CallbackQuery):
-    keyboards_sign_up = sign_up_keyboards()
-    await bot.send_message(callback_query.from_user.id, sign_up_text,
-                           reply_markup=keyboards_sign_up,
-                           parse_mode=ParseMode.HTML,
-                           disable_web_page_preview=True)
+async def call_us_handler(callback_query: types.CallbackQuery, state: FSMContext):
+    user_id = callback_query.from_user.id  # Получаем ID текущего пользователя
+    user_data = get_user_data_from_db(user_id)  # Функция, которая получает данные о пользователе из базы данных
+
+    if user_data:
+        # Если данные о пользователе найдены в базе данных, отобразите их
+        name = user_data.get('name', 'не указано')
+        surname = user_data.get('surname', 'не указано')
+        city = user_data.get('city', 'не указано')
+        phone_number = user_data.get('phone_number', 'не указано')
+        registration_date = user_data.get('registration_date')
+
+        text_mes = (f"🤝 Добро пожаловать, {name} {surname}! 🤝\n"
+                    "Ваши данные:\n\n"
+                    f"✅ <b>Имя:</b> {name}\n"
+                    f"✅ <b>Фамилия:</b> {surname}\n"
+                    f"✅ <b>Город:</b> {city}\n"
+                    f"✅ <b>Номер телефона:</b> {phone_number}\n"
+                    f"✅ <b>Дата регистрации:</b> {registration_date}\n\n"
+                    "Для возврата нажмите /start")
+
+        await bot.send_message(callback_query.from_user.id, text_mes, parse_mode=ParseMode.HTML)
+    else:
+        # Если данные о пользователе не найдены, предложите пройти регистрацию
+        keyboards_sign_up = sign_up_keyboards()
+        await bot.send_message(callback_query.from_user.id, sign_up_text,
+                               reply_markup=keyboards_sign_up,
+                               parse_mode=ParseMode.HTML,
+                               disable_web_page_preview=True)
 
 
 @dp.callback_query_handler(lambda c: c.data == "agree")
@@ -78,7 +114,7 @@ async def write_city_handlers(message: types.Message, state: FSMContext):
 @dp.message_handler(state=MakingAnOrder.write_city)
 async def write_name_handler(message: types.Message, state: FSMContext):
     city = message.text
-    await state.update_data(name=city)
+    await state.update_data(city=city)
     sign_up_texts = (
         "Для ввода номера телефона вы можете поделиться номером телефона, нажав на кнопку или ввести его вручную.\n\n"
         "Чтобы ввести номер вручную, просто отправьте его в текстовом поле.")
@@ -118,6 +154,8 @@ async def handle_confirmation(message: types.Message, state: FSMContext):
     phone_number = user_data.get('phone_number', 'не указан')
     city = user_data.get('city', 'не указан')
     registration_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    # Получение ID аккаунта Telegram
+    user_id = message.from_user.id
     # Составьте подтверждающее сообщение
     text_mes = (f"🤝 Рады познакомиться {name} {surname}! 🤝\n"
                 "Пожалуйста, подтвердите, все ли Ваши данные верны:\n\n"
@@ -131,11 +169,20 @@ async def handle_confirmation(message: types.Message, state: FSMContext):
     # Запись данных в базу данных
     conn = sqlite3.connect("your_database.db")  # Замените "your_database.db" на имя вашей базы данных
     cursor = conn.cursor()
-    cursor.execute("INSERT INTO users (name, surname, city, phone_number, registration_date) VALUES (?, ?, ?, ?, ?)",
-                   (name, surname, city, phone_number, registration_date))
+    cursor.execute('''CREATE TABLE IF NOT EXISTS users (
+                                                            user_id INTEGER,
+                                                            name TEXT,
+                                                            surname TEXT,
+                                                            city TEXT,
+                                                            phone_number TEXT,
+                                                            registration_date TEXT)''')
+    cursor.execute(
+        "INSERT INTO users (user_id, name, surname, city, phone_number, registration_date) VALUES (?, ?, ?, ?, ?, ?)",
+        (user_id, name, surname, city, phone_number, registration_date))
     conn.commit()
     conn.close()
-
+    await state.finish()  # Завершаем текущее состояние машины состояний
+    await state.reset_state()  # Сбрасываем все данные машины состояний, до значения по умолчанию
     await bot.send_message(message.from_user.id, text_mes)
 
 

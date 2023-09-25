@@ -26,7 +26,7 @@ def main() -> None:
     register_ask_anonymous_question_handler()  # Задать анонимный вопрос
     register_callback_query_handler()  # Записаться
     register_call_us_handler()  # Позвонить
-    register_my_detalist_handler()
+    register_my_detalist_handler()  # Мои данные
 
 
 if __name__ == '__main__':
