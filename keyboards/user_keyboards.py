@@ -1,4 +1,4 @@
-from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardMarkup, KeyboardButton
 
 
 def greeting_keyboards():
@@ -13,15 +13,20 @@ def greeting_keyboards():
     contact_the_operator = InlineKeyboardButton(text='👷 Связаться с оператором', url="https://t.me/pk_alina")
     current_promotions = InlineKeyboardButton(text='🎉 Текущие акции',
                                               callback_data='current_promotions')
-
+    my_details = InlineKeyboardButton(text='Мои данные', callback_data='my_details')
     keyboards_greeting.row(ask_anonymous_question)  # Задать анонимный вопрос
     keyboards_greeting.row(sign_up)  # Записаться
     keyboards_greeting.row(contacts_and_address, current_promotions)  # Контакты и адрес, Текущие акции
     keyboards_greeting.row(contact_the_operator)  # Связаться с оператором
+    keyboards_greeting.row(my_details)  # Связаться с оператором
     return keyboards_greeting
 
 
 def sign_up_keyboards():
+    """
+    👍 Согласен - agree
+    👎 Не согласен - disagree
+    """
     keyboards_sign_up = InlineKeyboardMarkup()
     agree = InlineKeyboardButton(text='👍 Согласен', callback_data='agree')
     after = InlineKeyboardButton(text='👎 Не согласен', callback_data='disagree')
@@ -31,8 +36,8 @@ def sign_up_keyboards():
 
 def confirmation_keypad():
     """
-    Верно - faithfully
-    Не верно - not_true
+    👍 Верно - faithfully
+    👎 Не верно - not_true
     """
     confirmation_keyboards = InlineKeyboardMarkup()
     faithfully = InlineKeyboardButton(text="👍 Верно", callback_data="faithfully")
@@ -48,7 +53,7 @@ def appointment_selection_keypad():
     Чат с оператором - url="https://t.me/pk_alina"
     """
     appointment_selection_key = InlineKeyboardMarkup()
-    call_key = InlineKeyboardButton(text="Позвонить", callback_data="сall_key")
+    call_key = InlineKeyboardButton(text="Позвонить", callback_data="call_us")
     callback_key = InlineKeyboardButton(text="Заказать обратный звонок", callback_data="callback_key")
     chat_with_an_operator_key = InlineKeyboardButton(text="Чат с оператором", url="https://t.me/pk_alina")
     appointment_selection_key.row(call_key, callback_key)
@@ -56,8 +61,22 @@ def appointment_selection_keypad():
     return appointment_selection_key
 
 
+def contact_keyboard():
+    """Клавиатура отправки отчетов"""
+    markup = ReplyKeyboardMarkup(resize_keyboard=True)
+    # Add a button for sending the contact
+    send_contact_button = KeyboardButton("📱 Отправить", request_contact=True)
+    # Add a button for manual input
+    manual_input_button = KeyboardButton("📝 Ввести вручную")
+    markup.add(send_contact_button)
+    markup.add(manual_input_button)
+
+    return markup
+
+
 if __name__ == '__main__':
     greeting_keyboards()
     sign_up_keyboards()
     confirmation_keypad()
     appointment_selection_keypad()
+    contact_keyboard()
