@@ -21,6 +21,14 @@ class MakingAnOrder(StatesGroup):
     write_city = State()  # Запись города
 
 
+class ChangingData(StatesGroup):
+    """Создание класса состояний, для смены данных пользователем"""
+    changing_name = State()  # Имя
+    changing_surname = State()  # Фамилия
+    changing_phone = State()  # Передача номера телефона кнопкой
+    changing_city = State()  # Запись города
+
+
 @dp.callback_query_handler(lambda c: c.data == "my_details")
 async def call_us_handler(callback_query: types.CallbackQuery, state: FSMContext):
     user_id = callback_query.from_user.id  # Получаем ID текущего пользователя
@@ -59,10 +67,10 @@ async def call_us_handler(callback_query: types.CallbackQuery, state: FSMContext
 async def edit_name_handler(callback_query: types.CallbackQuery):
     # Отправляем сообщение с запросом на ввод нового имени и включаем состояние
     await bot.send_message(callback_query.from_user.id, "Введите новое имя:")
-    await MakingAnOrder.write_name.set()
+    await ChangingData.changing_name.set()
 
 
-@dp.message_handler(state=MakingAnOrder.write_name)
+@dp.message_handler(state=ChangingData.changing_name)
 async def process_entered_name(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         user_id = message.from_user.id
@@ -83,10 +91,10 @@ async def process_entered_name(message: types.Message, state: FSMContext):
 async def edit_surname_handler(callback_query: types.CallbackQuery):
     # Отправляем сообщение с запросом на ввод нового имени и включаем состояние
     await bot.send_message(callback_query.from_user.id, "Введите новую фамилию:")
-    await MakingAnOrder.write_surname.set()
+    await ChangingData.changing_surname.set()
 
 
-@dp.message_handler(state=MakingAnOrder.write_surname)
+@dp.message_handler(state=ChangingData.changing_surname)
 async def process_entered_edit_surname(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         user_id = message.from_user.id
@@ -107,10 +115,10 @@ async def process_entered_edit_surname(message: types.Message, state: FSMContext
 async def edit_city_handler(callback_query: types.CallbackQuery):
     # Отправляем сообщение с запросом на ввод нового имени и включаем состояние
     await bot.send_message(callback_query.from_user.id, "Введите новый город:")
-    await MakingAnOrder.write_city.set()
+    await ChangingData.changing_city.set()
 
 
-@dp.message_handler(state=MakingAnOrder.write_city)
+@dp.message_handler(state=ChangingData.changing_city)
 async def process_entered_edit_city(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         user_id = message.from_user.id
@@ -131,21 +139,21 @@ async def process_entered_edit_city(message: types.Message, state: FSMContext):
 async def edit_city_handler(callback_query: types.CallbackQuery):
     # Отправляем сообщение с запросом на ввод нового имени и включаем состояние
     await bot.send_message(callback_query.from_user.id, "Введите новый номер телефона:")
-    await MakingAnOrder.phone_input.set()
+    await ChangingData.changing_phone.set()
 
 
-@dp.message_handler(state=MakingAnOrder.phone_input)
+@dp.message_handler(state=ChangingData.changing_phone)
 async def process_entered_edit_city(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         user_id = message.from_user.id
         new_phone = message.text
         if update_phone_in_db(user_id, new_phone):
             text_phone = (f"Номер телефона успешно изменен на {new_phone}\n\n"
-                         f"Для возврата нажмите /start")
+                          f"Для возврата нажмите /start")
             await bot.send_message(user_id, text_phone)
         else:
             text_phone = (f"Произошла ошибка при изменении номера телефона\n\n"
-                         f"Для возврата нажмите /start")
+                          f"Для возврата нажмите /start")
             await bot.send_message(user_id, text_phone)
         # Завершаем состояние после изменения имени
         await state.finish()
