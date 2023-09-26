@@ -78,8 +78,21 @@ def contact_keyboard():
     manual_input_button = KeyboardButton("📝 Ввести вручную")
     markup.add(send_contact_button)
     markup.add(manual_input_button)
-
     return markup
+
+
+def data_modification_keyboard():
+    """Клавиатура изменения данных"""
+    # Создаем клавиатуру для редактирования данных
+    edit_data_keyboard = InlineKeyboardMarkup()
+    edit_name_button = InlineKeyboardButton("Изменить Имя", callback_data="edit_name")
+    edit_surname_button = InlineKeyboardButton("Изменить Фамилию", callback_data="edit_surname")
+    edit_city_button = InlineKeyboardButton("Изменить Город", callback_data="edit_city")
+    edit_phone_button = InlineKeyboardButton("Изменить Номер 📱 ", callback_data="edit_phone")
+
+    edit_data_keyboard.row(edit_name_button, edit_surname_button)
+    edit_data_keyboard.row(edit_city_button, edit_phone_button)
+    return edit_data_keyboard
 
 
 if __name__ == '__main__':

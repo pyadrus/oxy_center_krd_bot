@@ -45,7 +45,8 @@ def get_user_data_from_db(user_id):
 async def sign_up_handler(callback_query: types.CallbackQuery):
     """Записаться"""
     try:
-        sing_text = "Записаться на прием к специалисту вы можете по телефону или через оператора в чате!"
+        sing_text = ("Записаться на прием к специалисту вы можете по телефону или через оператора в чате.\n\n"
+                     f"Для возврата нажмите /start")
         appointment_selection_key = appointment_selection_keypad()
         await bot.send_message(callback_query.from_user.id, sing_text,
                                reply_markup=appointment_selection_key,

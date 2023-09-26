@@ -6,44 +6,15 @@ from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import StatesGroup, State
 from aiogram.types import ParseMode, ReplyKeyboardMarkup, KeyboardButton
 
-from keyboards.user_keyboards import sign_up_keyboards
+from keyboards.user_keyboards import sign_up_keyboards, data_modification_keyboard
 from messages.user_messages import sign_up_text
+from services.database import update_name_in_db, update_surname_in_db, update_city_in_db, get_user_data_from_db, \
+    update_phone_in_db
 from system.dispatcher import dp, bot
 
 
-def get_user_data_from_db(user_id):
-    conn = sqlite3.connect("your_database.db")  # Замените "your_database.db" на имя вашей базы данных
-    cursor = conn.cursor()
-    cursor.execute('''CREATE TABLE IF NOT EXISTS users (
-                                                                user_id INTEGER,
-                                                                name TEXT,
-                                                                surname TEXT,
-                                                                city TEXT,
-                                                                phone_number TEXT,
-                                                                registration_date TEXT)''')
-    # Выполните SQL-запрос для получения данных о пользователе по его user_id
-    cursor.execute("SELECT * FROM users WHERE user_id = ?", (user_id,))
-
-    user_data = cursor.fetchone()  # Получите данные первой найденной записи
-
-    conn.close()
-
-    # Верните данные о пользователе как словарь, если они существуют, или None, если пользователя нет
-    if user_data:
-        _, name, surname, city, phone_number, registration_date = user_data
-        return {
-            'name': name,
-            'surname': surname,
-            'city': city,
-            'phone_number': phone_number,
-            'registration_date': registration_date
-        }
-    else:
-        return None
-
-
-# Создание класса состояний
 class MakingAnOrder(StatesGroup):
+    """Создание класса состояний"""
     write_name = State()  # Имя
     write_surname = State()  # Фамилия
     phone_input = State()  # Передача номера телефона кнопкой
@@ -71,8 +42,10 @@ async def call_us_handler(callback_query: types.CallbackQuery, state: FSMContext
                     f"✅ <b>Номер телефона:</b> {phone_number}\n"
                     f"✅ <b>Дата регистрации:</b> {registration_date}\n\n"
                     "Для возврата нажмите /start")
-
-        await bot.send_message(callback_query.from_user.id, text_mes, parse_mode=ParseMode.HTML)
+        edit_data_keyboard = data_modification_keyboard()
+        await bot.send_message(callback_query.from_user.id, text_mes,
+                               reply_markup=edit_data_keyboard,
+                               parse_mode=ParseMode.HTML)
     else:
         # Если данные о пользователе не найдены, предложите пройти регистрацию
         keyboards_sign_up = sign_up_keyboards()
@@ -80,6 +53,102 @@ async def call_us_handler(callback_query: types.CallbackQuery, state: FSMContext
                                reply_markup=keyboards_sign_up,
                                parse_mode=ParseMode.HTML,
                                disable_web_page_preview=True)
+
+
+@dp.callback_query_handler(lambda c: c.data == "edit_name")
+async def edit_name_handler(callback_query: types.CallbackQuery):
+    # Отправляем сообщение с запросом на ввод нового имени и включаем состояние
+    await bot.send_message(callback_query.from_user.id, "Введите новое имя:")
+    await MakingAnOrder.write_name.set()
+
+
+@dp.message_handler(state=MakingAnOrder.write_name)
+async def process_entered_name(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        user_id = message.from_user.id
+        new_name = message.text
+        if update_name_in_db(user_id, new_name):
+            text_name = (f"Имя успешно изменено на {new_name}\n\n"
+                         f"Для возврата нажмите /start")
+            await bot.send_message(user_id, text_name)
+        else:
+            text_name = (f"Произошла ошибка при изменении имени\n\n"
+                         f"Для возврата нажмите /start")
+            await bot.send_message(user_id, text_name)
+        # Завершаем состояние после изменения имени
+        await state.finish()
+
+
+@dp.callback_query_handler(lambda c: c.data == "edit_surname")
+async def edit_surname_handler(callback_query: types.CallbackQuery):
+    # Отправляем сообщение с запросом на ввод нового имени и включаем состояние
+    await bot.send_message(callback_query.from_user.id, "Введите новую фамилию:")
+    await MakingAnOrder.write_surname.set()
+
+
+@dp.message_handler(state=MakingAnOrder.write_surname)
+async def process_entered_edit_surname(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        user_id = message.from_user.id
+        new_surname = message.text
+        if update_surname_in_db(user_id, new_surname):
+            text_surname = (f"Фамилия успешно изменена на {new_surname}\n\n"
+                            f"Для возврата нажмите /start")
+            await bot.send_message(user_id, text_surname)
+        else:
+            text_surname = (f"Произошла ошибка при изменении фамилии\n\n"
+                            f"Для возврата нажмите /start")
+            await bot.send_message(user_id, text_surname)
+        # Завершаем состояние после изменения имени
+        await state.finish()
+
+
+@dp.callback_query_handler(lambda c: c.data == "edit_city")
+async def edit_city_handler(callback_query: types.CallbackQuery):
+    # Отправляем сообщение с запросом на ввод нового имени и включаем состояние
+    await bot.send_message(callback_query.from_user.id, "Введите новый город:")
+    await MakingAnOrder.write_city.set()
+
+
+@dp.message_handler(state=MakingAnOrder.write_city)
+async def process_entered_edit_city(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        user_id = message.from_user.id
+        new_city = message.text
+        if update_city_in_db(user_id, new_city):
+            text_city = (f"Фамилия успешно изменена на {new_city}\n\n"
+                         f"Для возврата нажмите /start")
+            await bot.send_message(user_id, text_city)
+        else:
+            text_city = (f"Произошла ошибка при изменении города\n\n"
+                         f"Для возврата нажмите /start")
+            await bot.send_message(user_id, text_city)
+        # Завершаем состояние после изменения имени
+        await state.finish()
+
+
+@dp.callback_query_handler(lambda c: c.data == "edit_phone")
+async def edit_city_handler(callback_query: types.CallbackQuery):
+    # Отправляем сообщение с запросом на ввод нового имени и включаем состояние
+    await bot.send_message(callback_query.from_user.id, "Введите новый номер телефона:")
+    await MakingAnOrder.phone_input.set()
+
+
+@dp.message_handler(state=MakingAnOrder.phone_input)
+async def process_entered_edit_city(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        user_id = message.from_user.id
+        new_phone = message.text
+        if update_phone_in_db(user_id, new_phone):
+            text_phone = (f"Номер телефона успешно изменен на {new_phone}\n\n"
+                         f"Для возврата нажмите /start")
+            await bot.send_message(user_id, text_phone)
+        else:
+            text_phone = (f"Произошла ошибка при изменении номера телефона\n\n"
+                         f"Для возврата нажмите /start")
+            await bot.send_message(user_id, text_phone)
+        # Завершаем состояние после изменения имени
+        await state.finish()
 
 
 @dp.callback_query_handler(lambda c: c.data == "agree")
@@ -169,16 +238,15 @@ async def handle_confirmation(message: types.Message, state: FSMContext):
     # Запись данных в базу данных
     conn = sqlite3.connect("your_database.db")  # Замените "your_database.db" на имя вашей базы данных
     cursor = conn.cursor()
-    cursor.execute('''CREATE TABLE IF NOT EXISTS users (
-                                                            user_id INTEGER,
-                                                            name TEXT,
-                                                            surname TEXT,
-                                                            city TEXT,
-                                                            phone_number TEXT,
-                                                            registration_date TEXT)''')
-    cursor.execute(
-        "INSERT INTO users (user_id, name, surname, city, phone_number, registration_date) VALUES (?, ?, ?, ?, ?, ?)",
-        (user_id, name, surname, city, phone_number, registration_date))
+    cursor.execute('''CREATE TABLE IF NOT EXISTS users (user_id INTEGER,
+                                                        name TEXT,
+                                                        surname TEXT,
+                                                        city TEXT,
+                                                        phone_number TEXT,
+                                                        registration_date TEXT)''')
+    cursor.execute("INSERT INTO users (user_id, name, surname, city, phone_number, registration_date) "
+                   "VALUES (?, ?, ?, ?, ?, ?)",
+                   (user_id, name, surname, city, phone_number, registration_date))
     conn.commit()
     conn.close()
     await state.finish()  # Завершаем текущее состояние машины состояний
@@ -189,3 +257,4 @@ async def handle_confirmation(message: types.Message, state: FSMContext):
 def register_my_detalist_handler():
     """Регистрируем handlers для 'Записаться'"""
     dp.register_message_handler(call_us_handler)
+    dp.register_message_handler(edit_name_handler)
