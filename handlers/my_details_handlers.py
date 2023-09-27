@@ -6,7 +6,7 @@ from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import StatesGroup, State
 from aiogram.types import ParseMode, ReplyKeyboardMarkup, KeyboardButton
 
-from keyboards.user_keyboards import sign_up_keyboards, data_modification_keyboard
+from keyboards.user_keyboards import create_sign_up_keyboard, create_data_modification_keyboard
 from messages.user_messages import sign_up_text
 from services.database import update_name_in_db, update_surname_in_db, update_city_in_db, get_user_data_from_db, \
     update_phone_in_db
@@ -50,13 +50,13 @@ async def call_us_handler(callback_query: types.CallbackQuery, state: FSMContext
                     f"✅ <b>Номер телефона:</b> {phone_number}\n"
                     f"✅ <b>Дата регистрации:</b> {registration_date}\n\n"
                     "Для возврата нажмите /start")
-        edit_data_keyboard = data_modification_keyboard()
+        edit_data_keyboard = create_data_modification_keyboard()
         await bot.send_message(callback_query.from_user.id, text_mes,
                                reply_markup=edit_data_keyboard,
                                parse_mode=ParseMode.HTML)
     else:
         # Если данные о пользователе не найдены, предложите пройти регистрацию
-        keyboards_sign_up = sign_up_keyboards()
+        keyboards_sign_up = create_sign_up_keyboard()
         await bot.send_message(callback_query.from_user.id, sign_up_text,
                                reply_markup=keyboards_sign_up,
                                parse_mode=ParseMode.HTML,

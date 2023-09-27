@@ -30,75 +30,63 @@ def create_my_details_keyboard():
     return my_details_keyboard
 
 
-def sign_up_keyboards():
-    """
-    👍 Согласен - agree
-    👎 Не согласен - disagree
-    """
-    keyboards_sign_up = InlineKeyboardMarkup()
-    agree = InlineKeyboardButton(text='👍 Согласен', callback_data='agree')
-    after = InlineKeyboardButton(text='👎 Не согласен', callback_data='disagree')
-    keyboards_sign_up.row(agree, after)
-    return keyboards_sign_up
+def create_sign_up_keyboard():
+    """Создает клавиатуру для кнопок 'Согласен' и 'Не согласен'"""
+    sign_up_keyboard = InlineKeyboardMarkup()
+    agree_button = InlineKeyboardButton(text='👍 Согласен', callback_data='agree')
+    disagree_button = InlineKeyboardButton(text='👎 Не согласен', callback_data='disagree')
+    sign_up_keyboard.row(agree_button, disagree_button)
+    return sign_up_keyboard
 
 
-def confirmation_keypad():
-    """
-    👍 Верно - faithfully
-    👎 Не верно - not_true
-    """
+def create_confirmation_keyboard():
+    """Создает клавиатуру для кнопок 'Верно' и 'Не верно'"""
     confirmation_keyboards = InlineKeyboardMarkup()
-    faithfully = InlineKeyboardButton(text="👍 Верно", callback_data="faithfully")
-    not_true = InlineKeyboardButton(text="👎 Не верно", callback_data="not_true")
-    confirmation_keyboards.row(faithfully, not_true)
+    faithfully_button = InlineKeyboardButton(text="👍 Верно", callback_data="faithfully")
+    not_true_button = InlineKeyboardButton(text="👎 Не верно", callback_data="not_true")
+    confirmation_keyboards.row(faithfully_button, not_true_button)
     return confirmation_keyboards
 
 
 def appointment_selection_keypad():
-    """
-    Позвонить - сall_key
-    Заказать обратный звонок - callback_key
-    Чат с оператором - url="https://t.me/pk_alina"
-    """
+    """Создает клавиатуру для выбора способа связи"""
     appointment_selection_key = InlineKeyboardMarkup()
-    call_key = InlineKeyboardButton(text="Позвонить", callback_data="call_us")
-    callback_key = InlineKeyboardButton(text="Заказать обратный звонок", callback_data="callback_key")
-    chat_with_an_operator_key = InlineKeyboardButton(text="Чат с оператором", url="https://t.me/pk_alina")
-    appointment_selection_key.row(call_key, callback_key)
-    appointment_selection_key.row(chat_with_an_operator_key)
+    call_button = InlineKeyboardButton(text="Позвонить", callback_data="call_us")
+    callback_button = InlineKeyboardButton(text="Заказать обратный звонок", callback_data="callback_key")
+    chat_with_operator_button = InlineKeyboardButton(text="Чат с оператором", url="https://t.me/pk_alina")
+    appointment_selection_key.row(call_button, callback_button)
+    appointment_selection_key.row(chat_with_operator_button)
     return appointment_selection_key
 
 
-def contact_keyboard():
-    """Клавиатура отправки отчетов"""
-    markup = ReplyKeyboardMarkup(resize_keyboard=True)
-    # Add a button for sending the contact
+def create_contact_keyboard():
+    """Создает клавиатуру для отправки контакта"""
+    contact_keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
     send_contact_button = KeyboardButton("📱 Отправить", request_contact=True)
-    # Add a button for manual input
     manual_input_button = KeyboardButton("📝 Ввести вручную")
-    markup.add(send_contact_button)
-    markup.add(manual_input_button)
-    return markup
+    contact_keyboard .add(send_contact_button)
+    contact_keyboard .add(manual_input_button)
+    return contact_keyboard
 
 
-def data_modification_keyboard():
-    """Клавиатура изменения данных"""
-    # Создаем клавиатуру для редактирования данных
-    edit_data_keyboard = InlineKeyboardMarkup()
+def create_data_modification_keyboard():
+    """Создает клавиатуру для изменения данных"""
+    data_modification_keyboard = InlineKeyboardMarkup()
     edit_name_button = InlineKeyboardButton("Изменить Имя", callback_data="edit_name")
     edit_surname_button = InlineKeyboardButton("Изменить Фамилию", callback_data="edit_surname")
     edit_city_button = InlineKeyboardButton("Изменить Город", callback_data="edit_city")
     edit_phone_button = InlineKeyboardButton("Изменить Номер 📱 ", callback_data="edit_phone")
 
-    edit_data_keyboard.row(edit_name_button, edit_surname_button)
-    edit_data_keyboard.row(edit_city_button, edit_phone_button)
-    return edit_data_keyboard
+    data_modification_keyboard .row(edit_name_button, edit_surname_button)
+    data_modification_keyboard .row(edit_city_button, edit_phone_button)
+    return data_modification_keyboard
 
 
 if __name__ == '__main__':
     create_greeting_keyboard()
-    sign_up_keyboards()
-    confirmation_keypad()
+    create_sign_up_keyboard()
+    create_confirmation_keyboard()
     appointment_selection_keypad()
-    contact_keyboard()
+    create_contact_keyboard()
     create_my_details_keyboard()
+    create_data_modification_keyboard()
