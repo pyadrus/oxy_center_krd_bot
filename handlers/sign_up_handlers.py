@@ -5,7 +5,7 @@ from aiogram.dispatcher import FSMContext
 from aiogram.types import ParseMode
 from loguru import logger  # Логирование с помощью loguru
 
-from keyboards.user_keyboards import appointment_selection_keypad, my_details
+from keyboards.user_keyboards import appointment_selection_keypad, create_my_details_keyboard
 from system.dispatcher import bot
 from system.dispatcher import dp  # Подключение к боту и диспетчеру пользователя
 
@@ -77,7 +77,7 @@ async def call_handler(callback_query: types.CallbackQuery, state: FSMContext):
                         "Для перехода в начальное меню нажмите /start")
 
         # Создаем клавиатуру с помощью my_details() (предполагается, что она существует)
-        my_details_key = my_details()
+        my_details_key = create_my_details_keyboard()
         # Отправляем сообщение с предложением зарегистрироваться и клавиатурой
         await bot.send_message(callback_query.from_user.id, sign_up_text,
                                reply_markup=my_details_key,
@@ -111,7 +111,7 @@ async def callback_key_handler(callback_query: types.CallbackQuery, state: FSMCo
                         "Для доступа к этому разделу, пожалуйста, <b>зарегистрируйтесь</b> в меню 'Мои данные'.\n\n"
                         "Для перехода в начальное меню нажмите /start")
         # Создаем клавиатуру с помощью my_details() (предполагается, что она существует)
-        my_details_key = my_details()
+        my_details_key = create_my_details_keyboard()
         # Отправляем сообщение с предложением зарегистрироваться и клавиатурой
         await bot.send_message(callback_query.from_user.id, sign_up_text,
                                reply_markup=my_details_key,

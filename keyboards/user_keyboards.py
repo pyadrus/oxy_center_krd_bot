@@ -1,33 +1,33 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardMarkup, KeyboardButton
 
 
-def greeting_keyboards():
-    """Клавиатуры поста приветствия 👋"""
-    keyboards_greeting = InlineKeyboardMarkup()
-    ask_anonymous_question = InlineKeyboardButton(text='🕵️ Задать анонимный вопрос',
-                                                  callback_data='ask_anonymous_question')
-    sign_up = InlineKeyboardButton(text='📝 Записаться',
-                                   callback_data='sign_up')
-    contacts_and_address = InlineKeyboardButton(text='📞 Контакты и адрес',
-                                                callback_data='contacts_and_address')
-    contact_the_operator = InlineKeyboardButton(text='👷 Связаться с оператором', url="https://t.me/pk_alina")
-    current_promotions = InlineKeyboardButton(text='🎉 Текущие акции',
-                                              callback_data='current_promotions')
-    my_details = InlineKeyboardButton(text='Мои данные', callback_data='my_details')
-    keyboards_greeting.row(ask_anonymous_question)  # Задать анонимный вопрос
-    keyboards_greeting.row(sign_up)  # Записаться
-    keyboards_greeting.row(contacts_and_address, current_promotions)  # Контакты и адрес, Текущие акции
-    keyboards_greeting.row(contact_the_operator)  # Связаться с оператором
-    keyboards_greeting.row(my_details)  # Связаться с оператором
-    return keyboards_greeting
+def create_greeting_keyboard():
+    """Создает клавиатуру для приветственного сообщения 👋"""
+    greeting_keyboard = InlineKeyboardMarkup()
+    ask_anonymous_question_button = InlineKeyboardButton(text='🕵️ Задать анонимный вопрос',
+                                                         callback_data='ask_anonymous_question')
+    sign_up_button = InlineKeyboardButton(text='📝 Записаться',
+                                          callback_data='sign_up')
+    contacts_and_address_button = InlineKeyboardButton(text='📞 Контакты и адрес',
+                                                       callback_data='contacts_and_address')
+    contact_operator_button = InlineKeyboardButton(text='👷 Связаться с оператором', url="https://t.me/pk_alina")
+    current_promotions_button = InlineKeyboardButton(text='🎉 Текущие акции',
+                                                     callback_data='current_promotions')
+    my_details_button = InlineKeyboardButton(text='Мои данные', callback_data='my_details')
+    greeting_keyboard.row(ask_anonymous_question_button)  # Задать анонимный вопрос
+    greeting_keyboard.row(sign_up_button)  # Записаться
+    greeting_keyboard.row(contacts_and_address_button, current_promotions_button)  # Контакты и адрес, Текущие акции
+    greeting_keyboard.row(contact_operator_button)  # Связаться с оператором
+    greeting_keyboard.row(my_details_button)  # Связаться с оператором
+    return greeting_keyboard
 
 
-def my_details():
-    """Кнопка мои данные"""
-    my_details_key = InlineKeyboardMarkup()
-    my_detailss = InlineKeyboardButton(text='Мои данные', callback_data='my_details')
-    my_details_key.row(my_detailss)  # Связаться с оператором
-    return my_details_key
+def create_my_details_keyboard():
+    """Создает клавиатуру для кнопки 'Мои данные'"""
+    my_details_keyboard = InlineKeyboardMarkup()
+    my_details_button = InlineKeyboardButton(text='Мои данные', callback_data='my_details')
+    my_details_keyboard.row(my_details_button)  # Связаться с оператором
+    return my_details_keyboard
 
 
 def sign_up_keyboards():
@@ -96,9 +96,9 @@ def data_modification_keyboard():
 
 
 if __name__ == '__main__':
-    greeting_keyboards()
+    create_greeting_keyboard()
     sign_up_keyboards()
     confirmation_keypad()
     appointment_selection_keypad()
     contact_keyboard()
-    my_details()
+    create_my_details_keyboard()

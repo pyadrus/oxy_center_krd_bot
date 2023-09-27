@@ -2,7 +2,7 @@ from aiogram import types
 from aiogram.dispatcher import FSMContext  # Состояния пользователя
 from loguru import logger  # Логирование с помощью loguru
 
-from keyboards.user_keyboards import greeting_keyboards  # Клавиатуры поста приветствия
+from keyboards.user_keyboards import create_greeting_keyboard  # Клавиатуры поста приветствия
 from system.dispatcher import dp  # Подключение к боту и диспетчеру пользователя
 
 
@@ -16,7 +16,7 @@ async def greeting(message: types.Message, state: FSMContext):
         from_user_name = message.from_user.first_name  # Получаем фамилию пользователя
         greeting_post = (f"{from_user_name}, Вас приветствует чат-бот клиники мужского и женского здоровья "
                          f"<b>OXY center!</b>")
-        keyboards_greeting = greeting_keyboards()  # Клавиатуры поста приветствия 👋
+        keyboards_greeting = create_greeting_keyboard()  # Клавиатуры поста приветствия 👋
         with open("media/photos/logo.jpg", "rb") as photo_file:
             await message.reply_photo(photo_file,  # Изображение в посте приветствия 👋
                                       caption=greeting_post,  # Текст для приветствия 👋
@@ -35,7 +35,7 @@ async def disagree_handler(callback_query: types.CallbackQuery, state: FSMContex
         from_user_name = callback_query.from_user.first_name  # Получаем имя пользователя из callback_query
         greeting_post = (f"{from_user_name}, Вас приветствует чат-бот клиники мужского и женского здоровья "
                          f"<b>OXY center!</b>")
-        keyboards_greeting = greeting_keyboards()  # Клавиатуры поста приветствия 👋
+        keyboards_greeting = create_greeting_keyboard()  # Клавиатуры поста приветствия 👋
         with open("media/photos/logo.jpg", "rb") as photo_file:
             await callback_query.message.reply_photo(photo_file,  # Изображение в посте приветствия 👋
                                                      caption=greeting_post,  # Текст для приветствия 👋
