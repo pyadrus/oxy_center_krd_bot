@@ -1,44 +1,12 @@
-import sqlite3
-
 from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.types import ParseMode
 from loguru import logger  # Логирование с помощью loguru
 
 from keyboards.user_keyboards import appointment_selection_keypad, create_my_details_keyboard
+from services.database import check_user_exists_in_db, fetch_user_data_from_db
 from system.dispatcher import bot
 from system.dispatcher import dp  # Подключение к боту и диспетчеру пользователя
-
-
-def check_user_exists_in_db(user_id):
-    # Подключитесь к вашей базе данных
-    conn = sqlite3.connect("your_database.db")  # Замените "your_database.db" на имя вашей базы данных
-    cursor = conn.cursor()
-    # Выполните SQL-запрос для проверки наличия пользователя в базе данных по его user_id
-    cursor.execute("SELECT COUNT(*) FROM users WHERE user_id = ?", (user_id,))
-    # Извлеките результат запроса
-    user_count = cursor.fetchone()[0]
-    conn.close()
-    # Если пользователь с указанным user_id найден (user_count больше 0), верните True, иначе верните False
-    return user_count > 0
-
-
-def get_user_data_from_db(user_id):
-    # Замените "your_database.db" на имя вашей базы данных
-    conn = sqlite3.connect("your_database.db")
-    cursor = conn.cursor()
-    # Выполните SQL-запрос для получения данных о пользователе по его user_id
-    cursor.execute("SELECT * FROM users WHERE user_id = ?", (user_id,))
-    user_data = cursor.fetchone()  # Получите данные первой найденной записи
-    conn.close()
-
-    # Верните данные о пользователе как словарь, если они существуют, или None, если пользователя нет
-    if user_data:
-        user_id, name, surname, city, phone_number, registration_date = user_data
-        return {'user_id': user_id, 'name': name, 'surname': surname, 'city': city, 'phone_number': phone_number,
-                'registration_date': registration_date}
-    else:
-        return None
 
 
 @dp.callback_query_handler(lambda c: c.data == "sign_up")
@@ -90,7 +58,7 @@ async def callback_key_handler(callback_query: types.CallbackQuery, state: FSMCo
     user_id = callback_query.from_user.id  # Получаем ID текущего пользователя
     user_exists = check_user_exists_in_db(user_id)  # Функция, которая проверяет наличие пользователя в базе данных
     if user_exists:
-        user_data = get_user_data_from_db(user_id)  # Получите данные пользователя из базы данных
+        user_data = fetch_user_data_from_db(user_id)  # Получите данные пользователя из базы данных
         name = user_data.get('name', 'не указано')
         surname = user_data.get('surname', 'не указано')
         phone_number = user_data.get('phone_number', 'не указано')
