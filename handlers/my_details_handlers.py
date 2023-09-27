@@ -1,15 +1,14 @@
-import sqlite3
 from datetime import datetime
 
 from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import StatesGroup, State
-from aiogram.types import ParseMode, ReplyKeyboardMarkup, KeyboardButton
+from aiogram.types import ParseMode
 
-from keyboards.user_keyboards import create_sign_up_keyboard, create_data_modification_keyboard
+from keyboards.user_keyboards import create_sign_up_keyboard, create_data_modification_keyboard, create_contact_keyboard
 from messages.user_messages import sign_up_text
 from services.database import update_name_in_db, update_surname_in_db, update_city_in_db, get_user_data_from_db, \
-    update_phone_in_db
+    update_phone_in_db, insert_user_data_to_database
 from system.dispatcher import dp, bot
 
 
@@ -76,12 +75,12 @@ async def process_entered_name(message: types.Message, state: FSMContext):
         user_id = message.from_user.id
         new_name = message.text
         if update_name_in_db(user_id, new_name):
-            text_name = (f"Имя успешно изменено на {new_name}\n\n"
-                         f"Для возврата нажмите /start")
+            text_name = f"✅ Имя успешно изменено на {new_name} ✅\n\n" \
+                        "Для возврата нажмите /start"
             await bot.send_message(user_id, text_name)
         else:
-            text_name = (f"Произошла ошибка при изменении имени\n\n"
-                         f"Для возврата нажмите /start")
+            text_name = f"❌ Произошла ошибка при изменении имени ❌\n\n" \
+                        "Для возврата нажмите /start"
             await bot.send_message(user_id, text_name)
         # Завершаем состояние после изменения имени
         await state.finish()
@@ -100,12 +99,12 @@ async def process_entered_edit_surname(message: types.Message, state: FSMContext
         user_id = message.from_user.id
         new_surname = message.text
         if update_surname_in_db(user_id, new_surname):
-            text_surname = (f"Фамилия успешно изменена на {new_surname}\n\n"
-                            f"Для возврата нажмите /start")
+            text_surname = f"✅ Фамилия успешно изменена на {new_surname} ✅\n\n" \
+                           "Для возврата нажмите /start"
             await bot.send_message(user_id, text_surname)
         else:
-            text_surname = (f"Произошла ошибка при изменении фамилии\n\n"
-                            f"Для возврата нажмите /start")
+            text_surname = f"❌ Произошла ошибка при изменении фамилии ❌\n\n" \
+                           "Для возврата нажмите /start"
             await bot.send_message(user_id, text_surname)
         # Завершаем состояние после изменения имени
         await state.finish()
@@ -124,12 +123,12 @@ async def process_entered_edit_city(message: types.Message, state: FSMContext):
         user_id = message.from_user.id
         new_city = message.text
         if update_city_in_db(user_id, new_city):
-            text_city = (f"Фамилия успешно изменена на {new_city}\n\n"
-                         f"Для возврата нажмите /start")
+            text_city = f"✅ Город успешно изменен на {new_city} ✅\n\n" \
+                        "Для возврата нажмите /start"
             await bot.send_message(user_id, text_city)
         else:
-            text_city = (f"Произошла ошибка при изменении города\n\n"
-                         f"Для возврата нажмите /start")
+            text_city = f"❌ Произошла ошибка при изменении города ❌\n\n" \
+                        "Для возврата нажмите /start"
             await bot.send_message(user_id, text_city)
         # Завершаем состояние после изменения имени
         await state.finish()
@@ -148,12 +147,12 @@ async def process_entered_edit_city(message: types.Message, state: FSMContext):
         user_id = message.from_user.id
         new_phone = message.text
         if update_phone_in_db(user_id, new_phone):
-            text_phone = (f"Номер телефона успешно изменен на {new_phone}\n\n"
-                          f"Для возврата нажмите /start")
+            text_phone = f"✅ Номер телефона успешно изменен на {new_phone} ✅\n\n" \
+                         "Для возврата нажмите /start"
             await bot.send_message(user_id, text_phone)
         else:
-            text_phone = (f"Произошла ошибка при изменении номера телефона\n\n"
-                          f"Для возврата нажмите /start")
+            text_phone = f"❌ Произошла ошибка при изменении номера телефона ❌\n\n" \
+                         "Для возврата нажмите /start"
             await bot.send_message(user_id, text_phone)
         # Завершаем состояние после изменения имени
         await state.finish()
@@ -195,13 +194,9 @@ async def write_name_handler(message: types.Message, state: FSMContext):
     sign_up_texts = (
         "Для ввода номера телефона вы можете поделиться номером телефона, нажав на кнопку или ввести его вручную.\n\n"
         "Чтобы ввести номер вручную, просто отправьте его в текстовом поле.")
-    markup = ReplyKeyboardMarkup(resize_keyboard=True)
-    # Добавьте кнопку для отправки контакта
-    send_contact_button = KeyboardButton("📱 Отправить", request_contact=True)
-    # Добавление кнопки для ручного ввода
-    markup.add(send_contact_button)
+    contact_keyboard = create_contact_keyboard()
     await bot.send_message(message.from_user.id, sign_up_texts,
-                           reply_markup=markup,  # Set the custom keyboard
+                           reply_markup=contact_keyboard,  # Set the custom keyboard
                            parse_mode=types.ParseMode.HTML,
                            disable_web_page_preview=True)
     await MakingAnOrder.phone_input.set()
@@ -243,26 +238,13 @@ async def handle_confirmation(message: types.Message, state: FSMContext):
                 f"✅ <b>Ваша Дата регистрации:</b> {registration_date}\n\n"
                 "Если данные не верны, то вы можете всегда изменить.\n\n"
                 "Для возврата нажмите /start")
-    # Запись данных в базу данных
-    conn = sqlite3.connect("your_database.db")  # Замените "your_database.db" на имя вашей базы данных
-    cursor = conn.cursor()
-    cursor.execute('''CREATE TABLE IF NOT EXISTS users (user_id INTEGER,
-                                                        name TEXT,
-                                                        surname TEXT,
-                                                        city TEXT,
-                                                        phone_number TEXT,
-                                                        registration_date TEXT)''')
-    cursor.execute("INSERT INTO users (user_id, name, surname, city, phone_number, registration_date) "
-                   "VALUES (?, ?, ?, ?, ?, ?)",
-                   (user_id, name, surname, city, phone_number, registration_date))
-    conn.commit()
-    conn.close()
+    insert_user_data_to_database(user_id, name, surname, city, phone_number, registration_date)
     await state.finish()  # Завершаем текущее состояние машины состояний
     await state.reset_state()  # Сбрасываем все данные машины состояний, до значения по умолчанию
     await bot.send_message(message.from_user.id, text_mes)
 
 
-def register_my_detalist_handler():
+def register_my_details_handler():
     """Регистрируем handlers для 'Записаться'"""
     dp.register_message_handler(call_us_handler)
     dp.register_message_handler(edit_name_handler)

@@ -63,9 +63,7 @@ def create_contact_keyboard():
     """Создает клавиатуру для отправки контакта"""
     contact_keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
     send_contact_button = KeyboardButton("📱 Отправить", request_contact=True)
-    manual_input_button = KeyboardButton("📝 Ввести вручную")
     contact_keyboard .add(send_contact_button)
-    contact_keyboard .add(manual_input_button)
     return contact_keyboard
 
 

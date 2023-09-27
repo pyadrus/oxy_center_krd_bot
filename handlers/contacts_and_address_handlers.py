@@ -7,7 +7,7 @@ from system.dispatcher import dp, bot
 
 @dp.callback_query_handler(lambda c: c.data == 'contacts_and_address')
 async def contacts_and_address_handler(callback_query: types.CallbackQuery):
-    """Контакты"""
+    """Контакты и адрес"""
     try:
         await bot.send_message(callback_query.from_user.id, contacts_and_address_text, parse_mode=types.ParseMode.HTML,
                                disable_web_page_preview=True)
