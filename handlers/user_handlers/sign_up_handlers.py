@@ -5,7 +5,7 @@ from loguru import logger  # Логирование с помощью loguru
 
 from keyboards.user_keyboards import appointment_selection_keypad, create_my_details_keyboard
 from services.database import check_user_exists_in_db, fetch_user_data_from_db
-from system.dispatcher import bot
+from system.dispatcher import bot, ADMIN_CHAT_ID
 from system.dispatcher import dp  # Подключение к боту и диспетчеру пользователя
 
 
@@ -64,7 +64,7 @@ async def callback_key_handler(callback_query: types.CallbackQuery, state: FSMCo
         phone_number = user_data.get('phone_number', 'не указано')
 
         # Отправьте уведомление администратору с данными пользователя
-        admin_user_id = 535185511  # Замените на ID администратора
+        admin_user_id = ADMIN_CHAT_ID  # Замените на ID администратора
         message_text = (f"Пользователь {name} {surname} заказал обратный звонок.\n"
                         f"Номер телефона для обратной связи: {phone_number}")
         await bot.send_message(admin_user_id, message_text)

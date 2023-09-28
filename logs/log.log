@@ -1,0 +1,260 @@
+2023-09-27 17:40:31.535 | ERROR    | handlers.user_handlers.user_handlers:greeting:57 - no such table: users_start
+Traceback (most recent call last):
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 34, in <module>
+    main()  # Запуск бота
+    └ <function main at 0x00000233C554B880>
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 19, in main
+    executor.start_polling(dp, skip_updates=True)
+    │        │             └ <aiogram.dispatcher.dispatcher.Dispatcher object at 0x00000233C590B5D0>
+    │        └ <function start_polling at 0x00000233C554A340>
+    └ <module 'aiogram.utils.executor' from 'C:\\Users\\zhvit\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\aio...
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\utils\executor.py", line 45, in start_polling
+    executor.start_polling(
+    │        └ <function Executor.start_polling at 0x00000233C554AE80>
+    └ <aiogram.utils.executor.Executor object at 0x00000233C4302A90>
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\utils\executor.py", line 323, in start_polling
+    loop.run_forever()
+    │    └ <function ProactorEventLoop.run_forever at 0x00000233C3D3F420>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python311\Lib\asyncio\windows_events.py", line 321, in run_forever
+    super().run_forever()
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 607, in run_forever
+    self._run_once()
+    │    └ <function BaseEventLoop._run_once at 0x00000233C3C851C0>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 1922, in _run_once
+    handle._run()
+    │      └ <function Handle._run at 0x00000233C3BC2980>
+    └ <Handle <TaskStepMethWrapper object at 0x00000233C5C644F0>()>
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python311\Lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+    │    │            │    │           │    └ <member '_args' of 'Handle' objects>
+    │    │            │    │           └ <Handle <TaskStepMethWrapper object at 0x00000233C5C644F0>()>
+    │    │            │    └ <member '_callback' of 'Handle' objects>
+    │    │            └ <Handle <TaskStepMethWrapper object at 0x00000233C5C644F0>()>
+    │    └ <member '_context' of 'Handle' objects>
+    └ <Handle <TaskStepMethWrapper object at 0x00000233C5C644F0>()>
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\dispatcher\handler.py", line 117, in notify
+    response = await handler_obj.handler(*args, **partial_data)
+                     │           │        │       └ {}
+                     │           │        └ (<Update {"update_id": 63013008, "message": {"message_id": 2133, "from": {"id": 535185511, "is_bot": false, "first_name": "𝖁𝖎...
+                     │           └ <bound method Dispatcher.process_update of <aiogram.dispatcher.dispatcher.Dispatcher object at 0x00000233C590B5D0>>
+                     └ Handler.HandlerObj(handler=<bound method Dispatcher.process_update of <aiogram.dispatcher.dispatcher.Dispatcher object at 0x0...
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 256, in process_update
+    return await self.message_handlers.notify(update.message)
+                 │    │                │      │      └ <aiogram.types.fields.Field object at 0x00000233C4BBFB50>
+                 │    │                │      └ <Update {"update_id": 63013008, "message": {"message_id": 2133, "from": {"id": 535185511, "is_bot": false, "first_name": "𝖁𝖎𝖙...
+                 │    │                └ <function Handler.notify at 0x00000233C4C622A0>
+                 │    └ <aiogram.dispatcher.handler.Handler object at 0x00000233C41D9290>
+                 └ <aiogram.dispatcher.dispatcher.Dispatcher object at 0x00000233C590B5D0>
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\dispatcher\handler.py", line 117, in notify
+    response = await handler_obj.handler(*args, **partial_data)
+                     │           │        │       └ {'state': <aiogram.dispatcher.storage.FSMContext object at 0x00000233C5C4D910>}
+                     │           │        └ (<Message {"message_id": 2133, "from": {"id": 535185511, "is_bot": false, "first_name": "𝖁𝖎𝖙𝖆𝖑𝖎𝛄", "last_name": "𝖅𝖍𝖆𝖇𝖎𝖓𝖘𝖐𝖎𝛄",...
+                     │           └ <function greeting at 0x00000233C5C10040>
+                     └ Handler.HandlerObj(handler=<function greeting at 0x00000233C5C10040>, spec=FullArgSpec(args=['message', 'state'], varargs=Non...
+
+> File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\handlers\user_handlers\user_handlers.py", line 39, in greeting
+    cursor.execute("INSERT INTO users_start (user_id, username, first_name, last_name, join_date) "
+    │      └ <method 'execute' of 'sqlite3.Cursor' objects>
+    └ <sqlite3.Cursor object at 0x00000233C5C50EC0>
+
+sqlite3.OperationalError: no such table: users_start
+2023-09-27 17:42:08.114 | ERROR    | handlers.user_handlers.user_handlers:greeting:57 - UNIQUE constraint failed: users_start.user_id
+Traceback (most recent call last):
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 34, in <module>
+    main()  # Запуск бота
+    └ <function main at 0x00000258ED97B880>
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 19, in main
+    executor.start_polling(dp, skip_updates=True)
+    │        │             └ <aiogram.dispatcher.dispatcher.Dispatcher object at 0x00000258EDD4AD10>
+    │        └ <function start_polling at 0x00000258ED97A340>
+    └ <module 'aiogram.utils.executor' from 'C:\\Users\\zhvit\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\aio...
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\utils\executor.py", line 45, in start_polling
+    executor.start_polling(
+    │        └ <function Executor.start_polling at 0x00000258ED97AE80>
+    └ <aiogram.utils.executor.Executor object at 0x00000258EDD5F990>
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\utils\executor.py", line 323, in start_polling
+    loop.run_forever()
+    │    └ <function ProactorEventLoop.run_forever at 0x00000258EC16F420>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python311\Lib\asyncio\windows_events.py", line 321, in run_forever
+    super().run_forever()
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 607, in run_forever
+    self._run_once()
+    │    └ <function BaseEventLoop._run_once at 0x00000258EC0B51C0>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 1922, in _run_once
+    handle._run()
+    │      └ <function Handle._run at 0x00000258EBFF2980>
+    └ <Handle <TaskStepMethWrapper object at 0x00000258EE090880>()>
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python311\Lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+    │    │            │    │           │    └ <member '_args' of 'Handle' objects>
+    │    │            │    │           └ <Handle <TaskStepMethWrapper object at 0x00000258EE090880>()>
+    │    │            │    └ <member '_callback' of 'Handle' objects>
+    │    │            └ <Handle <TaskStepMethWrapper object at 0x00000258EE090880>()>
+    │    └ <member '_context' of 'Handle' objects>
+    └ <Handle <TaskStepMethWrapper object at 0x00000258EE090880>()>
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\dispatcher\handler.py", line 117, in notify
+    response = await handler_obj.handler(*args, **partial_data)
+                     │           │        │       └ {}
+                     │           │        └ (<Update {"update_id": 63013010, "message": {"message_id": 2136, "from": {"id": 535185511, "is_bot": false, "first_name": "𝖁𝖎...
+                     │           └ <bound method Dispatcher.process_update of <aiogram.dispatcher.dispatcher.Dispatcher object at 0x00000258EDD4AD10>>
+                     └ Handler.HandlerObj(handler=<bound method Dispatcher.process_update of <aiogram.dispatcher.dispatcher.Dispatcher object at 0x0...
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 256, in process_update
+    return await self.message_handlers.notify(update.message)
+                 │    │                │      │      └ <aiogram.types.fields.Field object at 0x00000258ECFEFA90>
+                 │    │                │      └ <Update {"update_id": 63013010, "message": {"message_id": 2136, "from": {"id": 535185511, "is_bot": false, "first_name": "𝖁𝖎𝖙...
+                 │    │                └ <function Handler.notify at 0x00000258ED0922A0>
+                 │    └ <aiogram.dispatcher.handler.Handler object at 0x00000258EDCCA290>
+                 └ <aiogram.dispatcher.dispatcher.Dispatcher object at 0x00000258EDD4AD10>
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\dispatcher\handler.py", line 117, in notify
+    response = await handler_obj.handler(*args, **partial_data)
+                     │           │        │       └ {'state': <aiogram.dispatcher.storage.FSMContext object at 0x00000258EDA3D910>}
+                     │           │        └ (<Message {"message_id": 2136, "from": {"id": 535185511, "is_bot": false, "first_name": "𝖁𝖎𝖙𝖆𝖑𝖎𝛄", "last_name": "𝖅𝖍𝖆𝖇𝖎𝖓𝖘𝖐𝖎𝛄",...
+                     │           └ <function greeting at 0x00000258EE017F60>
+                     └ Handler.HandlerObj(handler=<function greeting at 0x00000258EE017F60>, spec=FullArgSpec(args=['message', 'state'], varargs=Non...
+
+> File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\handlers\user_handlers\user_handlers.py", line 39, in greeting
+    cursor.execute("INSERT INTO users_start (user_id, username, first_name, last_name, join_date) "
+    │      └ <method 'execute' of 'sqlite3.Cursor' objects>
+    └ <sqlite3.Cursor object at 0x00000258EE079840>
+
+sqlite3.IntegrityError: UNIQUE constraint failed: users_start.user_id
+2023-09-27 17:42:20.392 | ERROR    | handlers.user_handlers.user_handlers:greeting:57 - database is locked
+Traceback (most recent call last):
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 34, in <module>
+    main()  # Запуск бота
+    └ <function main at 0x00000258ED97B880>
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 19, in main
+    executor.start_polling(dp, skip_updates=True)
+    │        │             └ <aiogram.dispatcher.dispatcher.Dispatcher object at 0x00000258EDD4AD10>
+    │        └ <function start_polling at 0x00000258ED97A340>
+    └ <module 'aiogram.utils.executor' from 'C:\\Users\\zhvit\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\aio...
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\utils\executor.py", line 45, in start_polling
+    executor.start_polling(
+    │        └ <function Executor.start_polling at 0x00000258ED97AE80>
+    └ <aiogram.utils.executor.Executor object at 0x00000258EDD5F990>
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\utils\executor.py", line 323, in start_polling
+    loop.run_forever()
+    │    └ <function ProactorEventLoop.run_forever at 0x00000258EC16F420>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python311\Lib\asyncio\windows_events.py", line 321, in run_forever
+    super().run_forever()
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 607, in run_forever
+    self._run_once()
+    │    └ <function BaseEventLoop._run_once at 0x00000258EC0B51C0>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 1922, in _run_once
+    handle._run()
+    │      └ <function Handle._run at 0x00000258EBFF2980>
+    └ <Handle <TaskStepMethWrapper object at 0x00000258EE090970>()>
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python311\Lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+    │    │            │    │           │    └ <member '_args' of 'Handle' objects>
+    │    │            │    │           └ <Handle <TaskStepMethWrapper object at 0x00000258EE090970>()>
+    │    │            │    └ <member '_callback' of 'Handle' objects>
+    │    │            └ <Handle <TaskStepMethWrapper object at 0x00000258EE090970>()>
+    │    └ <member '_context' of 'Handle' objects>
+    └ <Handle <TaskStepMethWrapper object at 0x00000258EE090970>()>
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\dispatcher\handler.py", line 117, in notify
+    response = await handler_obj.handler(*args, **partial_data)
+                     │           │        │       └ {}
+                     │           │        └ (<Update {"update_id": 63013011, "message": {"message_id": 2137, "from": {"id": 535185511, "is_bot": false, "first_name": "𝖁𝖎...
+                     │           └ <bound method Dispatcher.process_update of <aiogram.dispatcher.dispatcher.Dispatcher object at 0x00000258EDD4AD10>>
+                     └ Handler.HandlerObj(handler=<bound method Dispatcher.process_update of <aiogram.dispatcher.dispatcher.Dispatcher object at 0x0...
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 256, in process_update
+    return await self.message_handlers.notify(update.message)
+                 │    │                │      │      └ <aiogram.types.fields.Field object at 0x00000258ECFEFA90>
+                 │    │                │      └ <Update {"update_id": 63013011, "message": {"message_id": 2137, "from": {"id": 535185511, "is_bot": false, "first_name": "𝖁𝖎𝖙...
+                 │    │                └ <function Handler.notify at 0x00000258ED0922A0>
+                 │    └ <aiogram.dispatcher.handler.Handler object at 0x00000258EDCCA290>
+                 └ <aiogram.dispatcher.dispatcher.Dispatcher object at 0x00000258EDD4AD10>
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\dispatcher\handler.py", line 117, in notify
+    response = await handler_obj.handler(*args, **partial_data)
+                     │           │        │       └ {'state': <aiogram.dispatcher.storage.FSMContext object at 0x00000258EDD399D0>}
+                     │           │        └ (<Message {"message_id": 2137, "from": {"id": 535185511, "is_bot": false, "first_name": "𝖁𝖎𝖙𝖆𝖑𝖎𝛄", "last_name": "𝖅𝖍𝖆𝖇𝖎𝖓𝖘𝖐𝖎𝛄",...
+                     │           └ <function greeting at 0x00000258EE017F60>
+                     └ Handler.HandlerObj(handler=<function greeting at 0x00000258EE017F60>, spec=FullArgSpec(args=['message', 'state'], varargs=Non...
+
+> File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\handlers\user_handlers\user_handlers.py", line 39, in greeting
+    cursor.execute("INSERT INTO users_start (user_id, username, first_name, last_name, join_date) "
+    │      └ <method 'execute' of 'sqlite3.Cursor' objects>
+    └ <sqlite3.Cursor object at 0x00000258EF11B840>
+
+sqlite3.OperationalError: database is locked
+2023-09-27 17:42:50.309 | ERROR    | handlers.user_handlers.user_handlers:greeting:56 - UNIQUE constraint failed: users_start.user_id
+Traceback (most recent call last):
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 34, in <module>
+    main()  # Запуск бота
+    └ <function main at 0x00000220472DB880>
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 19, in main
+    executor.start_polling(dp, skip_updates=True)
+    │        │             └ <aiogram.dispatcher.dispatcher.Dispatcher object at 0x00000220476C0C90>
+    │        └ <function start_polling at 0x00000220472DA340>
+    └ <module 'aiogram.utils.executor' from 'C:\\Users\\zhvit\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\aio...
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\utils\executor.py", line 45, in start_polling
+    executor.start_polling(
+    │        └ <function Executor.start_polling at 0x00000220472DAE80>
+    └ <aiogram.utils.executor.Executor object at 0x00000220476BAC10>
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\utils\executor.py", line 323, in start_polling
+    loop.run_forever()
+    │    └ <function ProactorEventLoop.run_forever at 0x0000022045AEF420>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python311\Lib\asyncio\windows_events.py", line 321, in run_forever
+    super().run_forever()
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 607, in run_forever
+    self._run_once()
+    │    └ <function BaseEventLoop._run_once at 0x0000022045A351C0>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 1922, in _run_once
+    handle._run()
+    │      └ <function Handle._run at 0x0000022045982980>
+    └ <Handle <TaskStepMethWrapper object at 0x00000220479F0460>()>
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python311\Lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+    │    │            │    │           │    └ <member '_args' of 'Handle' objects>
+    │    │            │    │           └ <Handle <TaskStepMethWrapper object at 0x00000220479F0460>()>
+    │    │            │    └ <member '_callback' of 'Handle' objects>
+    │    │            └ <Handle <TaskStepMethWrapper object at 0x00000220479F0460>()>
+    │    └ <member '_context' of 'Handle' objects>
+    └ <Handle <TaskStepMethWrapper object at 0x00000220479F0460>()>
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\dispatcher\handler.py", line 117, in notify
+    response = await handler_obj.handler(*args, **partial_data)
+                     │           │        │       └ {}
+                     │           │        └ (<Update {"update_id": 63013013, "message": {"message_id": 2139, "from": {"id": 535185511, "is_bot": false, "first_name": "𝖁𝖎...
+                     │           └ <bound method Dispatcher.process_update of <aiogram.dispatcher.dispatcher.Dispatcher object at 0x00000220476C0C90>>
+                     └ Handler.HandlerObj(handler=<bound method Dispatcher.process_update of <aiogram.dispatcher.dispatcher.Dispatcher object at 0x0...
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 256, in process_update
+    return await self.message_handlers.notify(update.message)
+                 │    │                │      │      └ <aiogram.types.fields.Field object at 0x000002204714F950>
+                 │    │                │      └ <Update {"update_id": 63013013, "message": {"message_id": 2139, "from": {"id": 535185511, "is_bot": false, "first_name": "𝖁𝖎𝖙...
+                 │    │                └ <function Handler.notify at 0x00000220471F22A0>
+                 │    └ <aiogram.dispatcher.handler.Handler object at 0x00000220473E6850>
+                 └ <aiogram.dispatcher.dispatcher.Dispatcher object at 0x00000220476C0C90>
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\dispatcher\handler.py", line 117, in notify
+    response = await handler_obj.handler(*args, **partial_data)
+                     │           │        │       └ {'state': <aiogram.dispatcher.storage.FSMContext object at 0x00000220476BB0D0>}
+                     │           │        └ (<Message {"message_id": 2139, "from": {"id": 535185511, "is_bot": false, "first_name": "𝖁𝖎𝖙𝖆𝖑𝖎𝛄", "last_name": "𝖅𝖍𝖆𝖇𝖎𝖓𝖘𝖐𝖎𝛄",...
+                     │           └ <function greeting at 0x00000220479A4040>
+                     └ Handler.HandlerObj(handler=<function greeting at 0x00000220479A4040>, spec=FullArgSpec(args=['message', 'state'], varargs=Non...
+
+> File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\handlers\user_handlers\user_handlers.py", line 38, in greeting
+    cursor.execute("INSERT INTO users_start (user_id, username, first_name, last_name, join_date) "
+    │      └ <method 'execute' of 'sqlite3.Cursor' objects>
+    └ <sqlite3.Cursor object at 0x00000220479D8E40>
+
+sqlite3.IntegrityError: UNIQUE constraint failed: users_start.user_id

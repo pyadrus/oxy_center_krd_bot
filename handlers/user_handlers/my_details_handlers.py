@@ -5,7 +5,8 @@ from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import StatesGroup, State
 from aiogram.types import ParseMode
 
-from keyboards.user_keyboards import create_sign_up_keyboard, create_data_modification_keyboard, create_contact_keyboard
+from keyboards.user_keyboards import create_sign_up_keyboard, create_data_modification_keyboard, \
+    create_contact_keyboard
 from messages.user_messages import sign_up_text
 from services.database import update_name_in_db, update_surname_in_db, update_city_in_db, get_user_data_from_db, \
     update_phone_in_db, insert_user_data_to_database
@@ -230,17 +231,18 @@ async def handle_confirmation(message: types.Message, state: FSMContext):
     user_id = message.from_user.id
     # Составьте подтверждающее сообщение
     text_mes = (f"🤝 Рады познакомиться {name} {surname}! 🤝\n"
-                "Пожалуйста, подтвердите, все ли Ваши данные верны:\n\n"
+                "Ваши регистрационные данные:\n\n"
                 f"✅ <b>Ваше Имя:</b> {name}\n"
                 f"✅ <b>Ваша Фамилия:</b> {surname}\n"
                 f"✅ <b>Ваш Город:</b> {city}\n"
                 f"✅ <b>Ваш номер телефона:</b> {phone_number}\n"
                 f"✅ <b>Ваша Дата регистрации:</b> {registration_date}\n\n"
-                "Если данные не верны, то вы можете всегда изменить.\n\n"
+                "Вы можете изменить свои данные в меню \"Мои данные\".\n\n"
                 "Для возврата нажмите /start")
     insert_user_data_to_database(user_id, name, surname, city, phone_number, registration_date)
     await state.finish()  # Завершаем текущее состояние машины состояний
     await state.reset_state()  # Сбрасываем все данные машины состояний, до значения по умолчанию
+    # Создаем клавиатуру с помощью my_details() (предполагается, что она существует)
     await bot.send_message(message.from_user.id, text_mes)
 
 
