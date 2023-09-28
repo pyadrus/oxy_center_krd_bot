@@ -10,16 +10,18 @@ def create_greeting_keyboard():
                                           callback_data='sign_up')
     contacts_and_address_button = InlineKeyboardButton(text='📞 Контакты и адрес',
                                                        callback_data='contacts_and_address')
-    contact_operator_button = InlineKeyboardButton(text='👷 Связаться с оператором', url="https://t.me/pk_alina")
+    contact_operator_button = InlineKeyboardButton(text='👷 Связаться с контактным центром', url="https://t.me/pk_alina")
     current_promotions_button = InlineKeyboardButton(text='🎉 Текущие акции',
                                                      callback_data='current_promotions')
+    leave_review_button = InlineKeyboardButton(text="Оставить отзыв", callback_data='leave_review')
     my_details_button = InlineKeyboardButton(text='Мои данные', callback_data='my_details')
 
     greeting_keyboard.row(ask_anonymous_question_button)  # Задать анонимный вопрос
     greeting_keyboard.row(sign_up_button)  # Записаться
     greeting_keyboard.row(contacts_and_address_button, current_promotions_button)  # Контакты и адрес, Текущие акции
     greeting_keyboard.row(contact_operator_button)  # Связаться с оператором
-    greeting_keyboard.row(my_details_button)  # Связаться с оператором
+    greeting_keyboard.row(leave_review_button)  # Оставить отзыв
+    greeting_keyboard.row(my_details_button)  # Мои данные
     return greeting_keyboard
 
 
