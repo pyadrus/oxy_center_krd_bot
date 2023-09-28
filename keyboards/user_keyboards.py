@@ -18,11 +18,24 @@ def create_greeting_keyboard():
 
     greeting_keyboard.row(ask_anonymous_question_button)  # Задать анонимный вопрос
     greeting_keyboard.row(sign_up_button)  # Записаться
-    greeting_keyboard.row(contacts_and_address_button, current_promotions_button)  # Контакты и адрес, Текущие акции
+    greeting_keyboard.row(contacts_and_address_button,  # Контакты и адрес
+                          current_promotions_button)  # Текущие акции
     greeting_keyboard.row(contact_operator_button)  # Связаться с оператором
     greeting_keyboard.row(leave_review_button)  # Оставить отзыв
     greeting_keyboard.row(my_details_button)  # Мои данные
     return greeting_keyboard
+
+
+def stock_keyboard():
+    """Клавиатура с акциями"""
+    stock_keyboard = InlineKeyboardMarkup()
+    happy_parents_button = InlineKeyboardButton(text="Счастливые родители", callback_data='happy_parents')
+    second_opinion_of_fertility_specialists = InlineKeyboardButton(text="Второе мнение репродуктологов БЕСПАЛТНО", callback_data='second_opinion_of_fertility_specialists')
+    the_second_opinion_of_the_operators = InlineKeyboardButton(text="Второе мнение оперирующих гинекологов БЕСПЛАТНО", callback_data='the_second_opinion_of_the_operators')
+    stock_keyboard.row(happy_parents_button)
+    stock_keyboard.row(second_opinion_of_fertility_specialists)
+    stock_keyboard.row(the_second_opinion_of_the_operators)
+    return stock_keyboard
 
 
 def create_my_details_keyboard():
@@ -85,3 +98,4 @@ if __name__ == '__main__':
     create_contact_keyboard()
     create_my_details_keyboard()
     create_data_modification_keyboard()
+    stock_keyboard()
