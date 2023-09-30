@@ -13,8 +13,8 @@ def create_greeting_keyboard():
     contact_operator_button = InlineKeyboardButton(text='👷 Связаться с контактным центром', url="https://t.me/pk_alina")
     current_promotions_button = InlineKeyboardButton(text='🎉 Текущие акции',
                                                      callback_data='current_promotions')
-    leave_review_button = InlineKeyboardButton(text="Оставить отзыв", callback_data='leave_review')
-    my_details_button = InlineKeyboardButton(text='Мои данные', callback_data='my_details')
+    leave_review_button = InlineKeyboardButton(text="📝 Оставить отзыв", callback_data='leave_review')
+    my_details_button = InlineKeyboardButton(text='ℹ️ Мои данные', callback_data='my_details')
 
     greeting_keyboard.row(ask_anonymous_question_button)  # Задать анонимный вопрос
     greeting_keyboard.row(sign_up_button)  # Записаться
@@ -30,7 +30,7 @@ def stock_keyboard():
     """Клавиатура с акциями"""
     stock_keyboard = InlineKeyboardMarkup()
     happy_parents_button = InlineKeyboardButton(text="Счастливые родители", callback_data='happy_parents')
-    second_opinion_of_fertility_specialists = InlineKeyboardButton(text="Второе мнение репродуктологов БЕСПАЛТНО", callback_data='second_opinion_of_fertility_specialists')
+    second_opinion_of_fertility_specialists = InlineKeyboardButton(text="Второе мнение репродуктологов БЕСПЛАТНО", callback_data='second_opinion_of_fertility_specialists')
     the_second_opinion_of_the_operators = InlineKeyboardButton(text="Второе мнение оперирующих гинекологов БЕСПЛАТНО", callback_data='the_second_opinion_of_the_operators')
     stock_keyboard.row(happy_parents_button)
     stock_keyboard.row(second_opinion_of_fertility_specialists)
@@ -85,9 +85,11 @@ def create_data_modification_keyboard():
     edit_surname_button = InlineKeyboardButton("✏️Изменить Фамилию", callback_data="edit_surname")
     edit_city_button = InlineKeyboardButton("✏️Изменить Город", callback_data="edit_city")
     edit_phone_button = InlineKeyboardButton("✏️Изменить Номер 📱 ", callback_data="edit_phone")
+    start_button = InlineKeyboardButton("↩️ Вернуться в начальное меню", callback_data="disagree")
 
     data_modification_keyboard.row(edit_name_button, edit_surname_button)
     data_modification_keyboard.row(edit_city_button, edit_phone_button)
+    data_modification_keyboard.row(start_button)
     return data_modification_keyboard
 
 

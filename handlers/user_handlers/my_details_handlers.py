@@ -42,14 +42,13 @@ async def call_us_handler(callback_query: types.CallbackQuery, state: FSMContext
         phone_number = user_data.get('phone_number', 'не указано')
         registration_date = user_data.get('registration_date')
 
-        text_mes = (f"🤝 Добро пожаловать, {name} {surname}! 🤝\n"
+        text_mes = (f"🤝 Добро пожаловать, {name} {surname}!\n"
                     "Ваши данные:\n\n"
                     f"✅ <b>Имя:</b> {name}\n"
                     f"✅ <b>Фамилия:</b> {surname}\n"
                     f"✅ <b>Город:</b> {city}\n"
                     f"✅ <b>Номер телефона:</b> {phone_number}\n"
-                    f"✅ <b>Дата регистрации:</b> {registration_date}\n\n"
-                    "Для возврата нажмите /start")
+                    f"✅ <b>Дата регистрации:</b> {registration_date}\n\n")
         edit_data_keyboard = create_data_modification_keyboard()
         await bot.send_message(callback_query.from_user.id, text_mes,
                                reply_markup=edit_data_keyboard,
@@ -80,7 +79,7 @@ async def process_entered_name(message: types.Message, state: FSMContext):
                         "Для возврата нажмите /start"
             await bot.send_message(user_id, text_name)
         else:
-            text_name = f"❌ Произошла ошибка при изменении имени ❌\n\n" \
+            text_name = "❌ Произошла ошибка при изменении имени ❌\n\n" \
                         "Для возврата нажмите /start"
             await bot.send_message(user_id, text_name)
         # Завершаем состояние после изменения имени
@@ -104,7 +103,7 @@ async def process_entered_edit_surname(message: types.Message, state: FSMContext
                            "Для возврата нажмите /start"
             await bot.send_message(user_id, text_surname)
         else:
-            text_surname = f"❌ Произошла ошибка при изменении фамилии ❌\n\n" \
+            text_surname = "❌ Произошла ошибка при изменении фамилии ❌\n\n" \
                            "Для возврата нажмите /start"
             await bot.send_message(user_id, text_surname)
         # Завершаем состояние после изменения имени
@@ -128,7 +127,7 @@ async def process_entered_edit_city(message: types.Message, state: FSMContext):
                         "Для возврата нажмите /start"
             await bot.send_message(user_id, text_city)
         else:
-            text_city = f"❌ Произошла ошибка при изменении города ❌\n\n" \
+            text_city = "❌ Произошла ошибка при изменении города ❌\n\n" \
                         "Для возврата нажмите /start"
             await bot.send_message(user_id, text_city)
         # Завершаем состояние после изменения имени
@@ -152,7 +151,7 @@ async def process_entered_edit_city(message: types.Message, state: FSMContext):
                          "Для возврата нажмите /start"
             await bot.send_message(user_id, text_phone)
         else:
-            text_phone = f"❌ Произошла ошибка при изменении номера телефона ❌\n\n" \
+            text_phone = "❌ Произошла ошибка при изменении номера телефона ❌\n\n" \
                          "Для возврата нажмите /start"
             await bot.send_message(user_id, text_phone)
         # Завершаем состояние после изменения имени
@@ -163,7 +162,7 @@ async def process_entered_edit_city(message: types.Message, state: FSMContext):
 async def agree_handler(callback_query: types.CallbackQuery, state: FSMContext):
     await state.reset_state()
     await MakingAnOrder.write_surname.set()
-    text_mes = (f"👥 Введите вашу фамилию (желательно кириллицей):\n"
+    text_mes = ("👥 Введите вашу фамилию (желательно кириллицей):\n"
                 "Пример: Петров, Иванова, Сидоренко")
     await bot.send_message(callback_query.from_user.id, text_mes)
 
@@ -173,7 +172,7 @@ async def write_surname_handler(message: types.Message, state: FSMContext):
     surname = message.text
     await state.update_data(surname=surname)
     await MakingAnOrder.write_name.set()
-    text_mes = (f"👤 Введите ваше имя (желательно кириллицей):\n"
+    text_mes = ("👤 Введите ваше имя (желательно кириллицей):\n"
                 "Пример: Иван, Ольга, Анастасия")
     await bot.send_message(message.from_user.id, text_mes)
 
@@ -183,7 +182,7 @@ async def write_city_handlers(message: types.Message, state: FSMContext):
     name = message.text
     await state.update_data(name=name)
     await MakingAnOrder.write_city.set()
-    text_mes = (f"🏙️ Введите ваш город (желательно кириллицей):\n"
+    text_mes = ("🏙️ Введите ваш город (желательно кириллицей):\n"
                 "Пример: Москва, Санкт-Петербург")
     await bot.send_message(message.from_user.id, text_mes)
 

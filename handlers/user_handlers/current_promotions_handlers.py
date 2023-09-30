@@ -31,7 +31,7 @@ async def happy_parents_handler(callback_query: types.CallbackQuery):
 
 @dp.callback_query_handler(lambda c: c.data == 'second_opinion_of_fertility_specialists')
 async def second_opinion_of_fertility_specialists_handler(callback_query: types.CallbackQuery):
-    """Второе мнение репродуктологов БЕСПАЛТНО"""
+    """Второе мнение репродуктологов БЕСПЛАТНО"""
     try:
         await bot.send_message(callback_query.from_user.id, second_opinion_of_fertility_specialists_text,
                                parse_mode=types.ParseMode.HTML)

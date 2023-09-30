@@ -3,7 +3,7 @@ from aiogram.dispatcher import FSMContext  # Состояния пользова
 from loguru import logger  # Логирование с помощью loguru
 
 from keyboards.user_keyboards import create_greeting_keyboard  # Клавиатуры поста приветствия
-from system.dispatcher import dp  # Подключение к боту и диспетчеру пользователя
+from system.dispatcher import dp, bot  # Подключение к боту и диспетчеру пользователя
 import sqlite3
 
 
@@ -55,16 +55,16 @@ async def disagree_handler(callback_query: types.CallbackQuery, state: FSMContex
     try:
         await state.finish()  # Завершаем текущее состояние машины состояний
         await state.reset_state()  # Сбрасываем все данные машины состояний, до значения по умолчанию
-
-        from_user_name = callback_query.from_user.first_name  # Получаем имя пользователя из callback_query
-        greeting_post = (f"{from_user_name}, Вас приветствует чат-бот клиники мужского и женского здоровья "
-                         f"<b>OXY center!</b>")
+        from_user_name = callback_query.from_user.first_name  # Получаем фамилию пользователя
+        greeting_message = (f"{from_user_name}, Вас приветствует чат-бот клиники мужского и женского здоровья "
+                            f"<b>OXY center!</b>")
         keyboards_greeting = create_greeting_keyboard()  # Клавиатуры поста приветствия 👋
         with open("media/photos/logo.jpg", "rb") as photo_file:
-            await callback_query.message.reply_photo(photo_file,  # Изображение в посте приветствия 👋
-                                                     caption=greeting_post,  # Текст для приветствия 👋
-                                                     reply_markup=keyboards_greeting,  # Клавиатура приветствия 👋
-                                                     parse_mode=types.ParseMode.HTML)  # Текст в HTML-разметки
+            await bot.send_photo(callback_query.from_user.id,  # ID пользователя
+                                 photo=types.InputFile(photo_file),  # Изображение в посте приветствия 👋
+                                 caption=greeting_message,  # Текст для приветствия 👋
+                                 reply_markup=keyboards_greeting,  # Клавиатура приветствия 👋
+                                 parse_mode=types.ParseMode.HTML)  # Текст в HTML-разметки
     except Exception as error:
         logger.exception(error)
 

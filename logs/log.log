@@ -258,3 +258,395 @@ Traceback (most recent call last):
     └ <sqlite3.Cursor object at 0x00000220479D8E40>
 
 sqlite3.IntegrityError: UNIQUE constraint failed: users_start.user_id
+2023-09-30 02:33:30.427 | ERROR    | __main__:main:22 - Aiohttp client throws an error: ClientConnectorError: Cannot connect to host api.telegram.org:443 ssl:default [getaddrinfo failed]
+Traceback (most recent call last):
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 1155, in _create_direct_connection
+    hosts = await asyncio.shield(host_resolved)
+                  │       │      └ <Task finished name='Task-2' coro=<TCPConnector._resolve_host() done, defined at C:\Users\zhvit\AppData\Local\Programs\Python...
+                  │       └ <function shield at 0x0000024FEBA6C820>
+                  └ <module 'asyncio' from 'C:\\Users\\zhvit\\AppData\\Local\\Programs\\Python\\Python310\\lib\\asyncio\\__init__.py'>
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 874, in _resolve_host
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+                  │    │         │       │     │            │    └ 0
+                  │    │         │       │     │            └ <aiohttp.connector.TCPConnector object at 0x0000024FF0069A20>
+                  │    │         │       │     └ 443
+                  │    │         │       └ 'api.telegram.org'
+                  │    │         └ <function ThreadedResolver.resolve at 0x0000024FEC453250>
+                  │    └ <aiohttp.resolver.ThreadedResolver object at 0x0000024FF0069A80>
+                  └ <aiohttp.connector.TCPConnector object at 0x0000024FF0069A20>
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\resolver.py", line 33, in resolve
+    infos = await self._loop.getaddrinfo(
+                  │    │     └ <function BaseEventLoop.getaddrinfo at 0x0000024FEBA89BD0>
+                  │    └ <ProactorEventLoop running=False closed=False debug=False>
+                  └ <aiohttp.resolver.ThreadedResolver object at 0x0000024FF0069A80>
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 860, in getaddrinfo
+    return await self.run_in_executor(
+                 │    └ <function BaseEventLoop.run_in_executor at 0x0000024FEBA89A20>
+                 └ <ProactorEventLoop running=False closed=False debug=False>
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\concurrent\futures\thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             │        │            └ None
+             │        └ None
+             └ None
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\socket.py", line 955, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               │       │           │     │     │       │     │      └ <AddressInfo.AI_ADDRCONFIG: 1024>
+               │       │           │     │     │       │     └ 0
+               │       │           │     │     │       └ <SocketKind.SOCK_STREAM: 1>
+               │       │           │     │     └ 0
+               │       │           │     └ 443
+               │       │           └ 'api.telegram.org'
+               │       └ <built-in function getaddrinfo>
+               └ <module '_socket' from 'C:\\Users\\zhvit\\AppData\\Local\\Programs\\Python\\Python310\\DLLs\\_socket.pyd'>
+
+socket.gaierror: [Errno 11004] getaddrinfo failed
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\bot\api.py", line 139, in make_request
+    async with session.post(url, data=req, **kwargs) as response:
+               │       │    │         │      └ {'proxy': None, 'proxy_auth': None, 'timeout': <object object at 0x0000024FE9869660>}
+               │       │    │         └ <aiohttp.formdata.FormData object at 0x0000024FF0069B70>
+               │       │    └ 'https://api.telegram.org/bot6350767693:AAEercyVCWdBzuTX7FZGA4FJKqlVJU1rZqQ/getMe'
+               │       └ <function ClientSession.post at 0x0000024FEC4F1870>
+               └ <aiohttp.client.ClientSession object at 0x0000024FF0069B40>
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\client.py", line 1141, in __aenter__
+    self._resp = await self._coro
+    │    │             │    └ <member '_coro' of '_BaseRequestContextManager' objects>
+    │    │             └ <aiohttp.client._RequestContextManager object at 0x0000024FF0069CF0>
+    │    └ <member '_resp' of '_BaseRequestContextManager' objects>
+    └ <aiohttp.client._RequestContextManager object at 0x0000024FF0069CF0>
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\client.py", line 536, in _request
+    conn = await self._connector.connect(
+                 │    └ None
+                 └ <aiohttp.client.ClientSession object at 0x0000024FF0069B40>
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 540, in connect
+    proto = await self._create_connection(req, traces, timeout)
+                  │    │                  │    │       └ ClientTimeout(total=300, connect=None, sock_read=None, sock_connect=None)
+                  │    │                  │    └ []
+                  │    │                  └ <aiohttp.client_reqrep.ClientRequest object at 0x0000024FF0069DE0>
+                  │    └ <function TCPConnector._create_connection at 0x0000024FEC475120>
+                  └ <aiohttp.connector.TCPConnector object at 0x0000024FF0069A20>
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 901, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+                     │    │                         │    │       └ ClientTimeout(total=300, connect=None, sock_read=None, sock_connect=None)
+                     │    │                         │    └ []
+                     │    │                         └ <aiohttp.client_reqrep.ClientRequest object at 0x0000024FF0069DE0>
+                     │    └ <function TCPConnector._create_direct_connection at 0x0000024FEC475750>
+                     └ <aiohttp.connector.TCPConnector object at 0x0000024FF0069A20>
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 1169, in _create_direct_connection
+    raise ClientConnectorError(req.connection_key, exc) from exc
+          │                    │   └ <property object at 0x0000024FEC3E3BA0>
+          │                    └ <aiohttp.client_reqrep.ClientRequest object at 0x0000024FF0069DE0>
+          └ <class 'aiohttp.client_exceptions.ClientConnectorError'>
+
+aiohttp.client_exceptions.ClientConnectorError: Cannot connect to host api.telegram.org:443 ssl:default [getaddrinfo failed]
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 36, in <module>
+    main()  # Запуск бота
+    └ <function main at 0x0000024FF0073760>
+
+> File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 20, in main
+    executor.start_polling(dp, skip_updates=True)
+    │        │             └ <aiogram.dispatcher.dispatcher.Dispatcher object at 0x0000024FEFFD2F80>
+    │        └ <function start_polling at 0x0000024FECAAAEF0>
+    └ <module 'aiogram.utils.executor' from 'C:\\Users\\zhvit\\AppData\\Local\\Programs\\Python\\Python310\\lib\\site-packages\\aio...
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\utils\executor.py", line 45, in start_polling
+    executor.start_polling(
+    │        └ <function Executor.start_polling at 0x0000024FECAAB910>
+    └ <aiogram.utils.executor.Executor object at 0x0000024FF00697B0>
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\utils\executor.py", line 320, in start_polling
+    loop.run_until_complete(self._startup_polling())
+    │    │                  │    └ <function Executor._startup_polling at 0x0000024FECAABBE0>
+    │    │                  └ <aiogram.utils.executor.Executor object at 0x0000024FF00697B0>
+    │    └ <function BaseEventLoop.run_until_complete at 0x0000024FEBA89240>
+    └ <ProactorEventLoop running=False closed=False debug=False>
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 646, in run_until_complete
+    return future.result()
+           │      └ <method 'result' of '_asyncio.Task' objects>
+           └ <Task finished name='Task-1' coro=<Executor._startup_polling() done, defined at C:\Users\zhvit\AppData\Local\Programs\Python\...
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\utils\executor.py", line 372, in _startup_polling
+    await self._welcome()
+          │    └ <function Executor._welcome at 0x0000024FECAABAC0>
+          └ <aiogram.utils.executor.Executor object at 0x0000024FF00697B0>
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\utils\executor.py", line 361, in _welcome
+    user = await self.dispatcher.bot.me
+                 │    │          │   └ <property object at 0x0000024FEC9A41D0>
+                 │    │          └ <aiogram.bot.bot.Bot object at 0x0000024FEFFD2AD0>
+                 │    └ <aiogram.dispatcher.dispatcher.Dispatcher object at 0x0000024FEFFD2F80>
+                 └ <aiogram.utils.executor.Executor object at 0x0000024FF00697B0>
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\bot\bot.py", line 30, in me
+    setattr(self, '_me', await self.get_me())
+            │                  │    └ <function Bot.get_me at 0x0000024FEC991990>
+            │                  └ <aiogram.bot.bot.Bot object at 0x0000024FEFFD2AD0>
+            └ <aiogram.bot.bot.Bot object at 0x0000024FEFFD2AD0>
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\bot\bot.py", line 233, in get_me
+    result = await self.request(api.Methods.GET_ME, payload)
+                   │    │       │   │       │       └ {}
+                   │    │       │   │       └ <aiogram.utils.helper.Item object at 0x0000024FEC957DF0>
+                   │    │       │   └ <class 'aiogram.bot.api.Methods'>
+                   │    │       └ <module 'aiogram.bot.api' from 'C:\\Users\\zhvit\\AppData\\Local\\Programs\\Python\\Python310\\lib\\site-packages\\aiogram\\b...
+                   │    └ <function BaseBot.request at 0x0000024FEC990310>
+                   └ <aiogram.bot.bot.Bot object at 0x0000024FEFFD2AD0>
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\bot\base.py", line 236, in request
+    return await api.make_request(await self.get_session(), self.server, self.__token, method, data, files,
+                 │   │                  │    │              │    │       │             │       │     └ None
+                 │   │                  │    │              │    │       │             │       └ {}
+                 │   │                  │    │              │    │       │             └ 'getMe'
+                 │   │                  │    │              │    │       └ <aiogram.bot.bot.Bot object at 0x0000024FEFFD2AD0>
+                 │   │                  │    │              │    └ TelegramAPIServer(base='https://api.telegram.org/bot{token}/{method}', file='https://api.telegram.org/file/bot{token}/{path}')
+                 │   │                  │    │              └ <aiogram.bot.bot.Bot object at 0x0000024FEFFD2AD0>
+                 │   │                  │    └ <function BaseBot.get_session at 0x0000024FEC973B50>
+                 │   │                  └ <aiogram.bot.bot.Bot object at 0x0000024FEFFD2AD0>
+                 │   └ <function make_request at 0x0000024FEC91BA30>
+                 └ <module 'aiogram.bot.api' from 'C:\\Users\\zhvit\\AppData\\Local\\Programs\\Python\\Python310\\lib\\site-packages\\aiogram\\b...
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\bot\api.py", line 142, in make_request
+    raise exceptions.NetworkError(f"aiohttp client throws an error: {e.__class__.__name__}: {e}")
+          │          └ <class 'aiogram.utils.exceptions.NetworkError'>
+          └ <module 'aiogram.utils.exceptions' from 'C:\\Users\\zhvit\\AppData\\Local\\Programs\\Python\\Python310\\lib\\site-packages\\a...
+
+aiogram.utils.exceptions.NetworkError: Aiohttp client throws an error: ClientConnectorError: Cannot connect to host api.telegram.org:443 ssl:default [getaddrinfo failed]
+2023-09-30 02:40:23.695 | ERROR    | handlers.user_handlers.user_handlers:disagree_handler:92 - name 'message' is not defined
+Traceback (most recent call last):
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 36, in <module>
+    main()  # Запуск бота
+    └ <function main at 0x00000208E78F3880>
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 20, in main
+    executor.start_polling(dp, skip_updates=True)
+    │        │             └ <aiogram.dispatcher.dispatcher.Dispatcher object at 0x00000208E7857010>
+    │        └ <function start_polling at 0x00000208E432AEF0>
+    └ <module 'aiogram.utils.executor' from 'C:\\Users\\zhvit\\AppData\\Local\\Programs\\Python\\Python310\\lib\\site-packages\\aio...
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\utils\executor.py", line 45, in start_polling
+    executor.start_polling(
+    │        └ <function Executor.start_polling at 0x00000208E432B910>
+    └ <aiogram.utils.executor.Executor object at 0x00000208E788EB60>
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\utils\executor.py", line 323, in start_polling
+    loop.run_forever()
+    │    └ <function ProactorEventLoop.run_forever at 0x00000208E33B9C60>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\asyncio\windows_events.py", line 321, in run_forever
+    super().run_forever()
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 600, in run_forever
+    self._run_once()
+    │    └ <function BaseEventLoop._run_once at 0x00000208E330ACB0>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 1896, in _run_once
+    handle._run()
+    │      └ <function Handle._run at 0x00000208E325E290>
+    └ <Handle <TaskStepMethWrapper object at 0x00000208E7954EE0>()>
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+    │    │            │    │           │    └ <member '_args' of 'Handle' objects>
+    │    │            │    │           └ <Handle <TaskStepMethWrapper object at 0x00000208E7954EE0>()>
+    │    │            │    └ <member '_callback' of 'Handle' objects>
+    │    │            └ <Handle <TaskStepMethWrapper object at 0x00000208E7954EE0>()>
+    │    └ <member '_context' of 'Handle' objects>
+    └ <Handle <TaskStepMethWrapper object at 0x00000208E7954EE0>()>
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\dispatcher\handler.py", line 117, in notify
+    response = await handler_obj.handler(*args, **partial_data)
+                     │           │        │       └ {}
+                     │           │        └ (<Update {"update_id": 63013231, "callback_query": {"id": "2298604268429874562", "from": {"id": 535185511, "is_bot": false, "...
+                     │           └ <bound method Dispatcher.process_update of <aiogram.dispatcher.dispatcher.Dispatcher object at 0x00000208E7857010>>
+                     └ Handler.HandlerObj(handler=<bound method Dispatcher.process_update of <aiogram.dispatcher.dispatcher.Dispatcher object at 0x0...
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\dispatcher\dispatcher.py", line 283, in process_update
+    return await self.callback_query_handlers.notify(update.callback_query)
+                 │    │                       │      │      └ <aiogram.types.fields.Field object at 0x00000208E41D1510>
+                 │    │                       │      └ <Update {"update_id": 63013231, "callback_query": {"id": "2298604268429874562", "from": {"id": 535185511, "is_bot": false, "f...
+                 │    │                       └ <function Handler.notify at 0x00000208E4262050>
+                 │    └ <aiogram.dispatcher.handler.Handler object at 0x00000208E7857760>
+                 └ <aiogram.dispatcher.dispatcher.Dispatcher object at 0x00000208E7857010>
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\dispatcher\handler.py", line 117, in notify
+    response = await handler_obj.handler(*args, **partial_data)
+                     │           │        │       └ {'state': <aiogram.dispatcher.storage.FSMContext object at 0x00000208E79551E0>}
+                     │           │        └ (<CallbackQuery {"id": "2298604268429874562", "from": {"id": 535185511, "is_bot": false, "first_name": "𝖁𝖎𝖙𝖆𝖑𝖎𝛄", "last_name"...
+                     │           └ <function disagree_handler at 0x00000208E78B88B0>
+                     └ Handler.HandlerObj(handler=<function disagree_handler at 0x00000208E78B88B0>, spec=FullArgSpec(args=['callback_query', 'state...
+
+> File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\handlers\user_handlers\user_handlers.py", line 58, in disagree_handler
+    user_id = message.from_user.id
+
+NameError: name 'message' is not defined
+2023-09-30 02:42:45.778 | ERROR    | handlers.user_handlers.user_handlers:disagree_handler:92 - 'CallbackQuery' object has no attribute 'date'
+Traceback (most recent call last):
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 36, in <module>
+    main()  # Запуск бота
+    └ <function main at 0x0000022A82D97910>
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 20, in main
+    executor.start_polling(dp, skip_updates=True)
+    │        │             └ <aiogram.dispatcher.dispatcher.Dispatcher object at 0x0000022A82CF7040>
+    │        └ <function start_polling at 0x0000022AFF7CAEF0>
+    └ <module 'aiogram.utils.executor' from 'C:\\Users\\zhvit\\AppData\\Local\\Programs\\Python\\Python310\\lib\\site-packages\\aio...
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\utils\executor.py", line 45, in start_polling
+    executor.start_polling(
+    │        └ <function Executor.start_polling at 0x0000022AFF7CB910>
+    └ <aiogram.utils.executor.Executor object at 0x0000022A82D564A0>
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\utils\executor.py", line 323, in start_polling
+    loop.run_forever()
+    │    └ <function ProactorEventLoop.run_forever at 0x0000022AFE859C60>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\asyncio\windows_events.py", line 321, in run_forever
+    super().run_forever()
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 600, in run_forever
+    self._run_once()
+    │    └ <function BaseEventLoop._run_once at 0x0000022AFE7AACB0>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 1896, in _run_once
+    handle._run()
+    │      └ <function Handle._run at 0x0000022AFE6FE290>
+    └ <Handle <TaskStepMethWrapper object at 0x0000022A82DF5630>()>
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+    │    │            │    │           │    └ <member '_args' of 'Handle' objects>
+    │    │            │    │           └ <Handle <TaskStepMethWrapper object at 0x0000022A82DF5630>()>
+    │    │            │    └ <member '_callback' of 'Handle' objects>
+    │    │            └ <Handle <TaskStepMethWrapper object at 0x0000022A82DF5630>()>
+    │    └ <member '_context' of 'Handle' objects>
+    └ <Handle <TaskStepMethWrapper object at 0x0000022A82DF5630>()>
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\dispatcher\handler.py", line 117, in notify
+    response = await handler_obj.handler(*args, **partial_data)
+                     │           │        │       └ {}
+                     │           │        └ (<Update {"update_id": 63013235, "callback_query": {"id": "2298604269285448953", "from": {"id": 535185511, "is_bot": false, "...
+                     │           └ <bound method Dispatcher.process_update of <aiogram.dispatcher.dispatcher.Dispatcher object at 0x0000022A82CF7040>>
+                     └ Handler.HandlerObj(handler=<bound method Dispatcher.process_update of <aiogram.dispatcher.dispatcher.Dispatcher object at 0x0...
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\dispatcher\dispatcher.py", line 283, in process_update
+    return await self.callback_query_handlers.notify(update.callback_query)
+                 │    │                       │      │      └ <aiogram.types.fields.Field object at 0x0000022AFF671540>
+                 │    │                       │      └ <Update {"update_id": 63013235, "callback_query": {"id": "2298604269285448953", "from": {"id": 535185511, "is_bot": false, "f...
+                 │    │                       └ <function Handler.notify at 0x0000022AFF702050>
+                 │    └ <aiogram.dispatcher.handler.Handler object at 0x0000022A82CF7790>
+                 └ <aiogram.dispatcher.dispatcher.Dispatcher object at 0x0000022A82CF7040>
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\dispatcher\handler.py", line 117, in notify
+    response = await handler_obj.handler(*args, **partial_data)
+                     │           │        │       └ {'state': <aiogram.dispatcher.storage.FSMContext object at 0x0000022A82DF5060>}
+                     │           │        └ (<CallbackQuery {"id": "2298604269285448953", "from": {"id": 535185511, "is_bot": false, "first_name": "𝖁𝖎𝖙𝖆𝖑𝖎𝛄", "last_name"...
+                     │           └ <function disagree_handler at 0x0000022A82D58940>
+                     └ Handler.HandlerObj(handler=<function disagree_handler at 0x0000022A82D58940>, spec=FullArgSpec(args=['callback_query', 'state...
+
+> File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\handlers\user_handlers\user_handlers.py", line 62, in disagree_handler
+    join_date = callback_query.date.strftime("%Y-%m-%d %H:%M:%S")
+                └ <CallbackQuery {"id": "2298604269285448953", "from": {"id": 535185511, "is_bot": false, "first_name": "𝖁𝖎𝖙𝖆𝖑𝖎𝛄", "last_name":...
+
+AttributeError: 'CallbackQuery' object has no attribute 'date'
+2023-09-30 02:43:34.934 | ERROR    | handlers.user_handlers.user_handlers:disagree_handler:94 - name 'datetime' is not defined
+Traceback (most recent call last):
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 36, in <module>
+    main()  # Запуск бота
+    └ <function main at 0x0000021C00177910>
+
+  File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\main.py", line 20, in main
+    executor.start_polling(dp, skip_updates=True)
+    │        │             └ <aiogram.dispatcher.dispatcher.Dispatcher object at 0x0000021C000D7010>
+    │        └ <function start_polling at 0x0000021C7CBAAEF0>
+    └ <module 'aiogram.utils.executor' from 'C:\\Users\\zhvit\\AppData\\Local\\Programs\\Python\\Python310\\lib\\site-packages\\aio...
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\utils\executor.py", line 45, in start_polling
+    executor.start_polling(
+    │        └ <function Executor.start_polling at 0x0000021C7CBAB910>
+    └ <aiogram.utils.executor.Executor object at 0x0000021C00136470>
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\utils\executor.py", line 323, in start_polling
+    loop.run_forever()
+    │    └ <function ProactorEventLoop.run_forever at 0x0000021C7BC79C60>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\asyncio\windows_events.py", line 321, in run_forever
+    super().run_forever()
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 600, in run_forever
+    self._run_once()
+    │    └ <function BaseEventLoop._run_once at 0x0000021C7BBCACB0>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 1896, in _run_once
+    handle._run()
+    │      └ <function Handle._run at 0x0000021C7BB2E290>
+    └ <Handle <TaskStepMethWrapper object at 0x0000021C001D43D0>()>
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+    │    │            │    │           │    └ <member '_args' of 'Handle' objects>
+    │    │            │    │           └ <Handle <TaskStepMethWrapper object at 0x0000021C001D43D0>()>
+    │    │            │    └ <member '_callback' of 'Handle' objects>
+    │    │            └ <Handle <TaskStepMethWrapper object at 0x0000021C001D43D0>()>
+    │    └ <member '_context' of 'Handle' objects>
+    └ <Handle <TaskStepMethWrapper object at 0x0000021C001D43D0>()>
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\dispatcher\handler.py", line 117, in notify
+    response = await handler_obj.handler(*args, **partial_data)
+                     │           │        │       └ {}
+                     │           │        └ (<Update {"update_id": 63013239, "callback_query": {"id": "2298604270792831217", "from": {"id": 535185511, "is_bot": false, "...
+                     │           └ <bound method Dispatcher.process_update of <aiogram.dispatcher.dispatcher.Dispatcher object at 0x0000021C000D7010>>
+                     └ Handler.HandlerObj(handler=<bound method Dispatcher.process_update of <aiogram.dispatcher.dispatcher.Dispatcher object at 0x0...
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\dispatcher\dispatcher.py", line 283, in process_update
+    return await self.callback_query_handlers.notify(update.callback_query)
+                 │    │                       │      │      └ <aiogram.types.fields.Field object at 0x0000021C7CA55510>
+                 │    │                       │      └ <Update {"update_id": 63013239, "callback_query": {"id": "2298604270792831217", "from": {"id": 535185511, "is_bot": false, "f...
+                 │    │                       └ <function Handler.notify at 0x0000021C7CAE2050>
+                 │    └ <aiogram.dispatcher.handler.Handler object at 0x0000021C000D7760>
+                 └ <aiogram.dispatcher.dispatcher.Dispatcher object at 0x0000021C000D7010>
+
+  File "C:\Users\zhvit\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\dispatcher\handler.py", line 117, in notify
+    response = await handler_obj.handler(*args, **partial_data)
+                     │           │        │       └ {'state': <aiogram.dispatcher.storage.FSMContext object at 0x0000021C001D5090>}
+                     │           │        └ (<CallbackQuery {"id": "2298604270792831217", "from": {"id": 535185511, "is_bot": false, "first_name": "𝖁𝖎𝖙𝖆𝖑𝖎𝛄", "last_name"...
+                     │           └ <function disagree_handler at 0x0000021C00138940>
+                     └ Handler.HandlerObj(handler=<function disagree_handler at 0x0000021C00138940>, spec=FullArgSpec(args=['callback_query', 'state...
+
+> File "C:\Users\zhvit\YandexDisk\Python\Боты Telegram\@oxy_center_krd_bot\handlers\user_handlers\user_handlers.py", line 61, in disagree_handler
+    join_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+NameError: name 'datetime' is not defined
